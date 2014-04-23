@@ -31,8 +31,8 @@ public class CiteLoad extends ActionSupport{
         File file = new File("/home/tomcat6/webapps/CombPublication/CiteList.txt");
         
         FileWriter filewriter = new FileWriter(file, false);
-        for(int i = 0; i < array.size(); i++)
-            filewriter.write((new StringBuilder("[")).append(i + 1).append("] ").append(paper[i].getAuthor()).append(", \"").append(paper[i].getTitle()).append("\", ").append(paper[i].getPublication()).append("\r\n").toString());
+        //for(int i = 0; i < array.size(); i++)
+        //    filewriter.write((new StringBuilder("[")).append(i + 1).append("] ").append(paper[i].getAuthor()).append(", \"").append(paper[i].getTitle()).append("\", ").append(paper[i].getPublication()).append("\r\n").toString());
 
         filewriter.flush();
         filewriter.close();

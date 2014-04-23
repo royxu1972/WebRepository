@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- main -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="wayne">
+
+    <title>CT Repository</title>
+    <!-- customized css -->
+    <link rel="stylesheet" href="http://www.bootcss.com/p/unslider/style.css">
+    <style type="text/css">
+        .banner { position: relative; overflow: auto; }
+        .banner li { list-style: none; }
+        .banner ul li { float: left; }
+    </style>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/unslider.js"></script>
+    <script>
+        $(function() {
+            if(window.chrome) {
+                $('.banner li').css('background-size', '100% 100%');
+            }
+            $('.banner').unslider({
+                fluid: true,
+                dots: true,
+                speed: 500
+            });
+        });
+    </script>
+
+</head>
+
+
+<body>
+
+<h1>test</h1>
+
+<div class="banner">
+    <ul>
+        <li>
+            <h1>The jQuery slider that just slides.</h1>
+            <p>No fancy effects or unnecessary markup, and it’s less than 3kb.</p>
+        </li>
+
+        <li>
+            <h1>Fluid, flexible, fantastically minimal.</h1>
+            <p>Use any HTML in your slides, extend with CSS. You have full control.</p>
+        </li>
+
+        <li>
+            <h1>Open-source.</h1>
+            <p>Everything to do with Unslider is hosted on GitHub.</p>
+        </li>
+    </ul>
+</div>
+
+<p>end</p>
+
+
+</body>
+</html>

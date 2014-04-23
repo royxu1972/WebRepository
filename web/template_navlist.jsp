@@ -7,9 +7,9 @@ String par = request.getParameter("para");
 <div class="col-md-2">
 <ul class="nav nav-pills nav-stacked">
     <%if( par.equals("index") ){%>
-    <li class="active"><a href="/"><span class="glyphicon glyphicon-search"> Search</span></a></li>
+    <li class="active"><a href="/search.jsp"><span class="glyphicon glyphicon-search"> Search</span></a></li>
     <%}else{%>
-    <li><a href="/"><span class="glyphicon glyphicon-search"> Search</span></a></li>
+    <li><a href="/search.jsp"><span class="glyphicon glyphicon-search"> Search</span></a></li>
     <%}%>
     
     <%if( par.equals("statistic") ){%>

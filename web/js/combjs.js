@@ -28,21 +28,21 @@ $(document).ready(function() {
 	 * clear result table for author, field and publication
 	 */
 	$("#pa_main").click(function() { 
-		$("#pa").hide("slow");
+		$("#pa").hide();
 		$(".added").empty();
 		$(".pagecadd").empty();
-		$("#result_list").hide("slow");
+		$("#result_list").hide();
 		$("#search_page").hide();
-		$("#main_list").show("slow");
+		$("#main_list").show();
 	});
 	
 	$("#left_back").click(function() {
-		$("#pa").hide("slow");
+		$("#pa").hide();
 		$(".added").empty();
 		$(".pagecadd").empty();
-		$("#result_list").hide("slow");
+		$("#result_list").hide();
 		$("#search_page").hide();
-		$("#main_list").show("slow");
+		$("#main_list").show();
 	});
 	
 	/*
@@ -171,13 +171,27 @@ function showpagecount() {
  * 显示结果
  * 用于author, field, publication
  */
-var search_now = "" ;   // name
-var search_type = "" ;  // author or field
+var search_now = "" ;   // search content
+var search_type = "" ;  // all | index | author | field | pub
 
 function showsearh(data) {
 	json = eval( "("+data+")" ); 
 	json_data = data ;
-	
+
+    // when searching index, it may return nothing
+    if (search_type == "index" ) {
+        if (json == "") {
+            $("#sh1").hide();
+            $("#sh2").hide();
+            $("#search_none").fadeIn("slow");
+            return;
+        }
+        else {
+            $("#sh1").hide();
+            $("#sh2").hide();
+        }
+    }
+
 	page = parseInt(( json.length + pagesize - 1 ) / pagesize) ;
 	current = 1 ;
 	showpage(json, current);
@@ -198,21 +212,50 @@ function showsearh(data) {
 function showpage(json, num) {
 	$(".added").empty();
 	var start = ( num - 1 ) *  pagesize ;
-	for(var i = start ; i < start + pagesize && i < json.length ; i++ )    
-		$("#rstable").append("<tr class='added'><td>" + json[i].author + "</td><td>" +
-				json[i].title + "</td><td>" +
-				json[i].publication + "</td><td>" +
-				json[i].year + "</td><td>" ) ;
-	// show result 
-	if( search_now != "wholepaper" ) {
+    var target = "" ;
+	for(var i = start ; i < start + pagesize && i < json.length ; i++ ) {
+        if( json[i].doi == "#" ) {
+            target = "" ;
+        }
+        else {
+            target = "target='_blank'" ;
+        }
+        // new row in table
+        $("#rstable").append("<tr class='added'><td>" + (i+1) + "</td><td>" +
+            "<div class='row-fluid'><div class='col-md-12'>" +
+            "<p>" + json[i].author + "</p>" +
+            "<p><strong>" + json[i].title + "</strong></p>" +
+            "<p><em>" + json[i].fullpublication + "</em></p>" +
+            "<p class='pull-right' id='accordion'>" +
+            "<a data-toggle='collapse' data-parent='#accordion' href='#a_collapse" + i + "'>Abstract</a>&nbsp;&nbsp;|&nbsp;&nbsp;" +
+            "<a data-toggle='collapse' data-parent='#accordion' href='#b_collapse" + i + "'>BibTex</a>&nbsp;&nbsp;|&nbsp;&nbsp;" +
+            "<a href='" + json[i].doi + "' " + target + ">DOI</a></p></div>" +
+            "<div id='a_collapse" + i + "' class='col-md-12 pull-left panel panel-default collapse'><div class='panel-body'>" +
+            json[i].abstra + "</div></div>" +
+            "<div id='b_collapse" + i + "' class='col-md-12 pull-left panel panel-default collapse'><div class='panel-body'>" +
+            json[i].bib_citation +"</div></div>" +
+            "</div></td></tr>") ;
+    }
+
+	// show result
+    // search whole paper and index will not run followings
+	if( search_type != "all" || search_type != "index") {
 		$("#pa_main").html("<a href='#'>" + search_type + "</a>");
 		$("#pa_name").html(search_now);
 		$("#main_list").hide();
 	}
 	
-	$("#pa").show();
-	$("#sta").html("<p><span class='label label-success'>" + json.length + "</span> papers included</p>");
-	$("#result_list").show("slow");
+	$("#pa").fadeIn("slow");
+    // if searching index, the sta will show the search content, else, the content has been shown in main_list
+    if( search_type == "index" ) {
+        $("#sta").html("<p>searching for <strong class='text-success'>" + search_now +
+        "</strong>, and <span class='label label-success'>" + json.length + "</span> papers included</p>");
+    }
+    else {
+        $("#sta").html("<p><span class='label label-success'>" + json.length + "</span> papers included</p>");
+    }
+	//$("#result_list").show();
+    $("#result_list").fadeIn("slow") ;
 }
 
 
