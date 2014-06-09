@@ -7,21 +7,21 @@ String par = request.getParameter("para");
 <div class="col-md-2">
 <ul class="nav nav-pills nav-stacked">
     <%if( par.equals("index") ){%>
-    <li class="active"><a href="/search.jsp"><span class="glyphicon glyphicon-search"> Search</span></a></li>
+    <li class="active"><a href="/search.jsp"><i class="icon-search"></i>&nbsp;&nbsp;Search</a></li>
     <%}else{%>
-    <li><a href="/search.jsp"><span class="glyphicon glyphicon-search"> Search</span></a></li>
+    <li><a href="/search.jsp"><i class="icon-search"></i>&nbsp;&nbsp;Search</a></li>
     <%}%>
     
     <%if( par.equals("statistic") ){%>
-    <li class="active"><a href="/statistic.jsp"><span class="glyphicon glyphicon-th"> Statistic</span></a></li>
+    <li class="active"><a href="/statistic.jsp"><i class="icon-reorder"></i>&nbsp;&nbsp;Statistic</a></li>
     <%}else{%>
-    <li><a href="/statistic.jsp"><span class="glyphicon glyphicon-th"> Statistic</span></a></li>
+    <li><a href="/statistic.jsp"><i class="icon-reorder"></i>&nbsp;&nbsp;Statistic</a></li>
     <%}%>
-    
+
     <%if( par.equals("rank") ){%>
-    <li class="active"><a href="#"><span class="glyphicon glyphicon-leaf"> Rank</span></a></li>
+    <li class="active"><a href="#"><i class="icon-star"></i>&nbsp;&nbsp;Rank</a></li>
     <%}else{%>
-    <li><a href="/rank.jsp"><span class="glyphicon glyphicon-leaf"> Rank</span></a></li>
+    <li><a href="/rank.jsp"><i class="icon-star"></i>&nbsp;&nbsp;Rank</a></li>
     <%}%>  
 </ul>
 <br>

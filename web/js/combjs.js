@@ -172,7 +172,7 @@ function showpagecount() {
  * 用于author, field, publication
  */
 var search_now = "" ;   // search content
-var search_type = "" ;  // all | index | author | field | pub
+var search_type = "" ;  // all | index | author | field | publication
 
 function showsearh(data) {
 	json = eval( "("+data+")" ); 
@@ -222,19 +222,30 @@ function showpage(json, num) {
         }
         // new row in table
         $("#rstable").append("<tr class='added'><td>" + (i+1) + "</td><td>" +
-            "<div class='row-fluid'><div class='col-md-12'>" +
-            "<p>" + json[i].author + "</p>" +
-            "<p><strong>" + json[i].title + "</strong></p>" +
-            "<p><em>" + json[i].fullpublication + "</em></p>" +
-            "<p class='pull-right' id='accordion'>" +
-            "<a data-toggle='collapse' data-parent='#accordion' href='#a_collapse" + i + "'>Abstract</a>&nbsp;&nbsp;|&nbsp;&nbsp;" +
-            "<a data-toggle='collapse' data-parent='#accordion' href='#b_collapse" + i + "'>BibTex</a>&nbsp;&nbsp;|&nbsp;&nbsp;" +
-            "<a href='" + json[i].doi + "' " + target + ">DOI</a></p></div>" +
-            "<div id='a_collapse" + i + "' class='col-md-12 pull-left panel panel-default collapse'><div class='panel-body'>" +
-            json[i].abstra + "</div></div>" +
-            "<div id='b_collapse" + i + "' class='col-md-12 pull-left panel panel-default collapse'><div class='panel-body'>" +
-            json[i].bib_citation +"</div></div>" +
-            "</div></td></tr>") ;
+            "<div class='row'>" +
+                "<div class='col-md-12'>" +
+                    "<p>" + json[i].author + "</p>" +
+                    "<p><strong>" + json[i].title + "</strong></p>" +
+                    "<p><em>" + json[i].fullpublication + "</em></p>" +
+                "</div>" +
+            "</div>" +
+            "<div class='row'>" +
+                "<div class='col-md-12'>" +
+                    "<p class='pull-right' id='accordion'>" +
+                    "<a class='red_link' data-toggle='collapse' data-parent='#accordion' href='#a_collapse" + i + "'>Abstract</a>&nbsp;&nbsp;|&nbsp;&nbsp;" +
+                    "<a class='red_link' data-toggle='collapse' data-parent='#accordion' href='#b_collapse" + i + "'>BibTex</a>&nbsp;&nbsp;|&nbsp;&nbsp;" +
+                    "<a class='red_link' href='" + json[i].doi + "' " + target + ">DOI</a></p>" +
+                "</div>" +
+            "</div>" +
+            "<div class='row'>" +
+                "<div id='a_collapse" + i + "' class='col-md-12 panel panel-default collapse'>" +
+                    "<div class='panel-body'>" +json[i].abstra + "</div>" +
+                "</div>" +
+                "<div id='b_collapse" + i + "' class='col-md-12 panel panel-default collapse'>" +
+                    "<div class='panel-body'>" +json[i].bib_citation +"</div>" +
+                "</div>" +
+            "</div>" +
+            "</td></tr>") ;
     }
 
 	// show result

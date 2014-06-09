@@ -41,7 +41,7 @@ public class SLSearch extends ActionSupport {
 		System.out.print( "fuzzy search: " + sc[0] + " ");
 		String sql = "select * from paper.list where ( author like '%" + sc[0] + "%' OR " +
 		                                              "title like '%" + sc[0] + "%' OR " +
-				                                      "publication like '%" + sc[0] + "%' " ;
+				                                      "publication like '%" + sc[0] + "%' ) " ;
 		
 		//if( ad_author != null && !ad_author.equals("") )
 		//	sql += " AND First_Author = '" + ad_author + "'";
@@ -58,7 +58,7 @@ public class SLSearch extends ActionSupport {
 				
 				sql += "union select * from paper.list where ( author like '%" + sc[k] + "%' OR " +
                         "title like '%" + sc[k] + "%' OR " +
-                        "publication like '%" + sc[k] + "%' " ;
+                        "publication like '%" + sc[k] + "%' ) " ;
 				
 				//if( ad_author != null && !ad_author.equals("") )
                 //    sql += " AND First_Author = '" + ad_author + "'";

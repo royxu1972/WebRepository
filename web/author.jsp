@@ -11,15 +11,10 @@
     <meta name="author" content="wayne">
 
     <title>Publication</title>
-    <!-- customized css -->
-    <jsp:include page="template_css.jsp"/>
-    <style type="text/css">
-        .indexlabel {
-            font-size: 23px;
-            padding: 5px 15px 5px;
-        }
-    </style>
-
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap3.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/repository.css">
 
     <script src="js/jquery.js"></script>
     <script src="js/combjs.js"></script>

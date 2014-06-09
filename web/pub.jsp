@@ -11,8 +11,10 @@
     <meta name="author" content="wayne">
 
     <title>Publication</title>
-    <!-- customized css -->
-    <jsp:include page="template_css.jsp"/>
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap3.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/repository.css">
 
     <script src="js/jquery.js"></script>
     <script src="js/combjs.js"></script>
@@ -22,7 +24,7 @@
             $("p[id]").click(function () {
                 var para = "content=" + $(this).attr("id") + "&group=pub";
                 search_now = $(this).text();
-                search_type = "pub";
+                search_type = "publication";
                 $.ajax({
                     url: "contentAction.action",
                     type: "post",

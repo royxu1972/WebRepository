@@ -11,13 +11,22 @@
     <meta name="author" content="wayne">
 
     <title>Repository Search</title>
-    <!-- customized css -->
-    <jsp:include page="template_css.jsp"/>
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap3.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/repository.css">
 
     <script src="js/jquery.js"></script>
     <script src="js/combjs.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            // press enter button
+            $("#search_content").keypress(function (ee) {
+                if(ee.which == 13) {
+                    $("#sbtn").click();
+                    return false ;
+                }
+            });
             // search click
             $("#sbtn").click(function () {
                 str = $("#search_content").val().trim();
@@ -58,7 +67,6 @@
         rs.last();
         int RowCount = rs.getRow();
     %>
-
 </head>
 
 <body>
@@ -82,15 +90,15 @@
             <div class="col-md-10">
 
                 <!-- search 1 -->
-                <div id="sh1" class="row well-search1">
+                <div id="sh1" class="row well_search1">
                     <div class="col-md-12">
-                        <h3>All <span class="label label-success mainlabel">
+                        <h3>All <span class="label label-success main_label">
                         <%=RowCount%></span> relevant publications are included</h3>
                     </div>
                 </div>
 
                 <!-- search 2 -->
-                <div id="sh2" class="row well-search2">
+                <div id="sh2" class="row well_search2">
                     <div class="col-md-10">
                         <form role="form">
                             <div class="form-group">
@@ -101,7 +109,7 @@
                         </form>
                     </div>
                     <div class="col-md-2">
-                        <button id="sbtn" type="button" class="btn btn-primary searchbtn">Search</button>
+                        <button id="sbtn" type="button" class="btn btn-primary search_btn">Search</button>
                     </div>
                 </div>
 
@@ -155,7 +163,6 @@
     </div>
     <!-- /container -->
 
-    <div id="push"></div>
 </div>
 <!-- /wrap -->
 
@@ -163,17 +170,21 @@
 <jsp:include page="template_bottom.jsp"/>
 
 <!-- modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
-     id="myModal">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header"><h3>Attention</h3></div>
-            <div class="modal-body"><p>The input text of search form cannot be empty</p></div>
-            <div class="modal-footer"><a href="#" class="btn btn btn-danger" data-dismiss="modal">OK</a></div>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Attention</h4>
+            </div>
+            <div class="modal-body">
+                <p>The input text of search form cannot be empty</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn btn-danger" data-dismiss="modal">OK</a>
+            </div>
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
 </div>
 
 <script src="js/bootstrap3.js"></script>

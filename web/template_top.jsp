@@ -13,11 +13,10 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-        <li><a href="/"><strong>Home</strong></a></li>
-        <li><a href="/group.html"><strong>Group</strong></a></li>
-        <li><a href="/contact.html"><strong>Contact</strong></a></li>
-        <li><a href="#"><strong>About</strong></a></li>
+        <li><a href="/"><i class="icon-home icon-large"></i></a></li>
+        <li><a href="/group.html"><i class="icon-group"></i></a></li>
+        <li><a href="/contact.html"><i class="icon-envelope-alt"></i></a></li>
         </ul>
     </div>
-</div>    
+</div>
 </nav>

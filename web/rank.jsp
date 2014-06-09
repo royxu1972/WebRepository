@@ -10,9 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="wayne">
 
-    <title>Publication</title>
-    <!-- customized css -->
-    <jsp:include page="template_css.jsp"/>
+    <title>Rank</title>
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap3.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/repository.css">
 
     <script src="js/jquery.js"></script>
     <%@ page import="java.util.*" %>

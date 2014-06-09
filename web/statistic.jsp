@@ -9,9 +9,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="wayne">
 
-<title>Publication</title>
-<!-- customized css -->
-<jsp:include page="template_css.jsp"/>
+<title>Statistic</title>
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/bootstrap3.css">
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="css/repository.css">
 
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*" %>
@@ -23,11 +25,11 @@
     String sql1 = "select * from paper.cumulative";
     ResultSet rs1 = stmt.executeQuery(sql1);
     // rs1 result
-    String firstyear = "" ;
-    String lastyear = "" ;
-    String yearindex = "" ;
-    String annual = "" ;
-    String cumulative = "" ;
+    String firstyear = "";
+    String lastyear = "";
+    String yearindex = "";
+    String annual = "";
+    String cumulative = "";
     rs1.next();
     firstyear = lastyear = rs1.getString(1);
     yearindex = "'" + rs1.getString(1) + "',";
@@ -48,13 +50,13 @@
     String sql2 = "select * from paper.fieldcount order by count DESC";
     ResultSet rs2 = stmt.executeQuery(sql2);
     rs2.last();
-    int row_num = rs2.getRow() ;
-    String[] field_name = new String[row_num] ;
+    int row_num = rs2.getRow();
+    String[] field_name = new String[row_num];
     String[] field = new String[row_num];
-    for( int i=0 ; i<row_num; i++ ) {
-        rs2.absolute(i+1);
-        field_name[i] = rs2.getString(1) ;
-        field[i] = rs2.getString(2) ;
+    for (int i = 0; i < row_num; i++) {
+        rs2.absolute(i + 1);
+        field_name[i] = rs2.getString(1);
+        field[i] = rs2.getString(2);
     }
     rs2.close();
 
@@ -96,7 +98,7 @@
         var chart3;
 
         $("#show_c1").click(function () {
-            $("#btngroup").hide();
+            $("#btn_group").hide();
             $("#back_home").html("<a href='/statistic.jsp'>statistic</a>");
             $("#current").html("<span class='divider'>/</span>number of publication");
             $("#pbread").fadeIn("slow");
@@ -117,11 +119,13 @@
                     title: {
                         text: '# of publications'
                     },
-                    plotLines: [{
-                        value: 0,
-                        width: 1,
-                        color: '#808080'
-                    }],
+                    plotLines: [
+                        {
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        }
+                    ],
                     min: 0
                 },
                 tooltip: {
@@ -145,7 +149,7 @@
 
 
         $("#show_c2").click(function () {
-            $("#btngroup").hide();
+            $("#btn_group").hide();
             $("#back_home").html("<a href='/statistic.jsp'>statistic</a>");
             $("#current").html("<span class='divider'>/</span>ratio of field");
             $("#pbread").fadeIn("slow");
@@ -191,31 +195,32 @@
                         }
                     }
                 },
-                series: [{
-                    type: 'pie',
-                    name: 'Field ratio',
-                    data: [
-                        ['<%=field_name[0]%>', <%=field[0]%>],
-                        {
-                            name: '<%=field_name[1]%>',
-                            y: <%=field[1]%>,
-                            sliced: true,
-                            selected: true
-                        },
-                        <%
-                        for( int k=2; k<row_num-1; k++ ) {
-                            out.println("['" + field_name[k] + "', " + field[k] + "]," );
-                        }
-                        %>
-                        ['<%=field_name[row_num-1]%>', <%=field[row_num-1]%>]
-                    ]
-                }]
+                series: [
+                    {
+                        type: 'pie',
+                        name: 'Field ratio',
+                        data: [
+                            {
+                                name: '<%=field_name[0]%>',
+                                y: <%=field[0]%>,
+                                sliced: true,
+                                selected: true
+                            },
+                            <%
+                            for( int k=1; k<row_num-1; k++ ) {
+                                out.println("['" + field_name[k] + "', " + field[k] + "]," );
+                            }
+                            %>
+                            ['<%=field_name[row_num-1]%>', <%=field[row_num-1]%>]
+                        ]
+                    }
+                ]
             });
         });// end $(#show_c2)
 
 
         $("#show_c3").click(function () {
-            $("#btngroup").hide();
+            $("#btn_group").hide();
             $("#back_home").html("<a href='/statistic.jsp'>statistic</a>");
             $("#current").html("<span class='divider'>/</span>number of field");
             $("#pbread").fadeIn("slow");
@@ -244,9 +249,9 @@
                     }
                 },
                 tooltip: {
-                    formatter: function() {
-                        return '<b>'+ this.x +'</b><br/>'+
-                                this.series.name +': '+ this.y ;
+                    formatter: function () {
+                        return '<b>' + this.x + '</b><br/>' +
+                                this.series.name + ': ' + this.y;
                     }
                 },
                 plotOptions: {
@@ -308,20 +313,19 @@
                     </div>
                 </div>
 
-                <div id="btngroup" style="text-align:center" class="row">
+                <div id="btn_group" style="text-align:center" class="row">
                     <div class="col-md-1"></div>
 
                     <div class="col-md-3">
-                        <div id="show_c1"><a href="#" class="thumbnail"><img src="image/chart_area.png"/></a></div>
+                        <div id="show_c1"><a href="#" class="img-thumbnail"><img src="image/chart1.ico"/></a></div>
                         <h4>Number of Publication</h4>
-                        <p>The Number of Publications in the Year from <%=firstyear%> to <%=lastyear%>
-                        </p>
+                        <p>The Number of Publications in the Year from <%=firstyear%> to <%=lastyear%></p>
                     </div>
 
                     <div class="col-md-1"></div>
 
                     <div class="col-md-3">
-                        <div id="show_c2"><a href="#" class="thumbnail"><img src="image/chart_pie.png"/></a></div>
+                        <div id="show_c2"><a href="#" class="img-thumbnail"><img src="image/chart2.ico"/></a></div>
                         <h4>Ratio of Field</h4>
                         <p>The Ratio of CT Research Fields</p>
                     </div>
@@ -329,9 +333,9 @@
                     <div class="col-md-1"></div>
 
                     <div class="col-md-3">
-                        <div id="show_c3"><a href="#" class="thumbnail"><img src="image/chart_bar.png"/></a></div>
-                        <h4>Number of Field</h4>
-                        <p>The Ratio of CT Research Fields Annual</p>
+                        <div id="show_c3"><a href="#" class="img-thumbnail"><img src="image/chart3.ico"/></a></div>
+                        <h4>Annual Publication</h4>
+                        <p>The Annual Publication Number of Top Three Research Fields</p>
                     </div>
                 </div>
 

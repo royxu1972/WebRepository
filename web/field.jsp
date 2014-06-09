@@ -11,21 +11,17 @@
     <meta name="author" content="wayne">
 
     <title>Publication</title>
-    <!-- customized css -->
-    <jsp:include page="template_css.jsp"/>
-    <style type="text/css">
-        .wellfield {
-            padding-top: 40px;
-            text-align: center;
-        }
-    </style>
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap3.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/repository.css">
 
     <script src="js/jquery.js"></script>
     <script src="js/combjs.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             // search field id
-            $("h4[id]").click(function () {
+            $("h3[id]").click(function () {
                 var para = "content=" + $(this).attr("id") + "&group=field";
                 search_now = $(this).attr("id");
                 search_type = "field";
@@ -76,25 +72,60 @@
                     </div>
                 </div>
 
-                <!-- main list -->
-                <%@ page import="java.util.*" %>
-                <%@ page import="java.sql.*" %>
-                <%
-                    // search table paper.Author
-                    Class.forName("com.mysql.jdbc.Driver").newInstance();
-                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/paper", "root", "123456");
-                    Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-                    String sql = "select field from paper.fieldcount";
-                    ResultSet rs = stmt.executeQuery(sql);
-                %>
                 <div id="main_list" class="row">
-                    <div class="col-md-12 wellfield">
-                        <%
-                            while (rs.next()) {
-                                String name = rs.getString(1);
-                                out.println("<h4 class='col-md-3' id='" + name + "'><a href='#'>" + name + "</a></h4>");
-                            }
-                        %>
+                    <div class="col-md-12 well_field">
+
+                        <h3 id="model"><a href='#' class="none_dec"><i class="icon-chevron-right"></i> model</a></h3>
+                        <p> Model Studies on identifying the parameters, values, and the interrelations
+                            of parameters of SUT. </p>
+                        <p><a href="#" class="none_dec"><span class="label label-danger">learn more...</span></a></p>
+                        <br/>
+
+                        <h3 id="generation"><a href='#' class="none_dec"><i class="icon-chevron-right"></i> geneartion</a></h3>
+                        <p> Generation studies on generating a small test suite effectively.
+                            As the minimum size is unknown, so methods have focused on fnding CAs that
+                            have as few test cases as possible. Mathematical and computational methods are both used.
+                            The former one can yield the best possible CAs in certain cases,
+                            but its application is restrict to sets of factors.
+                            Hence, computational methods, which primarily use greedy strategies or
+                            search techniques to generate any types of CA, have dominated the literates.</p>
+                        <p><a href="#" class="none_dec"><span class="label label-danger">learn more...</span></a></p>
+                        <br/>
+
+                        <h3 id="constraint"><a href='#' class="none_dec"><i class="icon-chevron-right"></i> constraint</a></h3>
+                        <p> Constraints studies on avoiding invalid test cases in the test suite generation. </p>
+                        <p><a href="#" class="none_dec"><span class="label label-danger">learn more...</span></a></p>
+                        <br/>
+
+                        <h3 id="prioritization"><a href='#' class="none_dec"><i class="icon-chevron-right"></i> prioritization</a></h3>
+                        <p> Prioritization studies on the order of test execution to detect faults as early
+                            as possible in the most economical way. </p>
+                        <p><a href="#" class="none_dec"><span class="label label-danger">learn more...</span></a></p>
+                        <br/>
+
+                        <h3 id="diagnosis"><a href='#' class="none_dec"><i class="icon-chevron-right"></i> fault diagnosis</a></h3>
+                        <p> Failure characterization and diagnosis studies on fixing the detected faults.</p>
+                        <p><a href="#" class="none_dec"><span class="label label-danger">learn more...</span></a></p>
+                        <br/>
+
+                        <h3 id="evaluation"><a href='#' class="none_dec"><i class="icon-chevron-right"></i> evaluation</a></h3>
+                        <p> Evaluation and metric studies on measuring the combination coverage of CT and the
+                            effectiveness of fault detection, and the degree to which CT contributes
+                            to the improvement of software quality. </p>
+                        <p><a href="#" class="none_dec"><span class="label label-danger">learn more...</span></a></p>
+                        <br/>
+
+                        <h3 id="application"><a href='#' class="none_dec"><i class="icon-chevron-right"></i> application</a></h3>
+                        <p> Application studies on practical testing procedure for CT and reporting
+                            the results of the CT application. </p>
+                        <p><a href="#" class="none_dec"><span class="label label-danger">learn more...</span></a></p>
+                        <br/>
+
+                        <h3 id="survey"><a href='#' class="none_dec"><i class="icon-chevron-right"></i> survey</a></h3>
+                        <p> Survey summarizes the current researches in CT.</p>
+                        <p><a href="#" class="none_dec"><span class="label label-danger">learn more...</span></a></p>
+                        <br/>
+
                     </div>
                 </div>
                 <!-- main_list -->

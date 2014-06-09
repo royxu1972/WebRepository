@@ -11,8 +11,11 @@
     <meta name="author" content="wayne">
 
     <title>CT Repository</title>
-    <!-- customized css -->
-    <jsp:include page="template_css.jsp"/>
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap3.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/repository.css">
+
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Allerta">
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Berkshire+Swash">
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans">
