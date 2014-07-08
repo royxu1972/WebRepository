@@ -100,7 +100,7 @@
         $("#show_c1").click(function () {
             $("#btn_group").hide();
             $("#back_home").html("<a href='/statistic.jsp'>statistic</a>");
-            $("#current").html("<span class='divider'>/</span>number of publication");
+            $("#current").html("<span class='divider'></span>number of publication");
             $("#pbread").fadeIn("slow");
             $("#container-chart").fadeIn("slow");
 
@@ -151,7 +151,7 @@
         $("#show_c2").click(function () {
             $("#btn_group").hide();
             $("#back_home").html("<a href='/statistic.jsp'>statistic</a>");
-            $("#current").html("<span class='divider'>/</span>ratio of field");
+            $("#current").html("<span class='divider'></span>ratio of field");
             $("#pbread").fadeIn("slow");
             $("#container-chart").fadeIn("slow");
 
@@ -222,7 +222,7 @@
         $("#show_c3").click(function () {
             $("#btn_group").hide();
             $("#back_home").html("<a href='/statistic.jsp'>statistic</a>");
-            $("#current").html("<span class='divider'>/</span>number of field");
+            $("#current").html("<span class='divider'></span>number of field");
             $("#pbread").fadeIn("slow");
             $("#container-chart").fadeIn("slow");
 
