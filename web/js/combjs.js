@@ -169,7 +169,7 @@ function showpagecount() {
 
 /*
  * 显示结果
- * 用于author, field, publication
+ * 用于 all | index | author | field | publication
  */
 var search_now = "" ;   // search content
 var search_type = "" ;  // all | index | author | field | publication

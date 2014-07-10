@@ -61,28 +61,32 @@ public class Paper {
     @inproceedings : $publication, pp.$pages, $years
     @phdthesis : $publication, $year
     @techreport : $publication, $no, $year
+    @book : $publication, $year
     */
-    public void setPublication(String pub, String vol, String no, String pages, String year) {
+    public void setPublication(String pub, String abbr, String vol, String no, String pages, String year) {
         this.publication = pub ;
         this.vol = vol ;
         this.no = no ;
         this.pages = pages ;
         this.year = year ;
 
-        if( this.type.equals("article") ) {
-            this.fullpublication = pub + ", " + vol + "(" + no + "): " + pages + ", " + year ;
+        if( !abbr.equals("") )
+            publication += " (" +  abbr + ")" ;
+
+        if( type.equals("article") ) {
+            fullpublication = publication + ", " + vol + "(" + no + "): " + pages + ", " + year ;
         }
-        else if( this.type.equals("inproceedings") ) {
-            this.fullpublication = pub + ", pp." + pages + ", " + year ;
+        else if( type.equals("inproceedings") ) {
+            fullpublication = publication + ", pp." + pages + ", " + year ;
         }
-        else if( this.type.equals("phdthesis") ) {
-            this.fullpublication = pub + ", " + year ;
+        else if( type.equals("phdthesis") || type.equals("book") ) {
+            fullpublication = publication + ", " + year ;
         }
-        else if( this.type.equals("techreport") ) {
-            this.fullpublication = pub + ", " + no + ", " + year ;
+        else if( type.equals("techreport") ) {
+            fullpublication = publication + ", " + no + ", " + year ;
         }
         else {
-            this.fullpublication = pub ;
+            fullpublication = publication ;
         }
     }
     public String getPublication() {
@@ -99,24 +103,21 @@ public class Paper {
 		this.field = a ;
 	}
 
-    public String getDoi() {
-        if( doi.equals("") )
-            doi = "#" ;
-        return doi ;
-    }
+    public String getDoi() { return doi ; }
     public void setDoi( String a ) {
-        this.doi = a ;
+        if( a.equals("") )
+            this.doi = "#" ;
+        else
+            this.doi = "http://dx.doi.org/" + a ;
     }
 
-    public String getAbstra() {
-        if( abstra.equals("") )
-            abstra = "available soon..." ;
-        return abstra ;
-    }
+    public String getAbstra() { return abstra ; }
     public void setAbstra( String a ) {
-        this.abstra = a ;
+        if( a.equals("") )
+            this.abstra = "available soon..." ;
+        else
+            this.abstra = a ;
     }
-
 
     //
     // bib citation for html
@@ -168,7 +169,7 @@ public class Paper {
                     "}";
         }
         /*
-        @inproceedings{$bib,
+        @phdthesis{$bib,
             author = {$author},
             title = {$title},
             school = {$publication},
@@ -202,7 +203,7 @@ public class Paper {
                     "}";
         }
         else {
-            data = "error bib citation" ;
+            data = "bib citation available soon..." ;
         }
         return data ;
     }

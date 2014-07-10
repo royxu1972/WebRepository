@@ -97,9 +97,8 @@
                         <p><a href="#" class="none_dec"><span class="label label-danger">learn more...</span></a></p>
                         <br/>
 
-                        <h3 id="prioritization"><a href='#' class="none_dec"><i class="icon-chevron-right"></i> prioritization</a></h3>
-                        <p> Prioritization studies on the order of test execution to detect faults as early
-                            as possible in the most economical way. </p>
+                        <h3 id="optimization"><a href='#' class="none_dec"><i class="icon-chevron-right"></i> prioritization</a></h3>
+                        <p> optimization studies on the selection, minimization and prioritization of the test suite.</p>
                         <p><a href="#" class="none_dec"><span class="label label-danger">learn more...</span></a></p>
                         <br/>
 

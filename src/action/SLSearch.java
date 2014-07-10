@@ -95,10 +95,10 @@ public class SLSearch extends ActionSupport {
             // basic info
             p.setAuthor(rs.getString(5));
             p.setTitle(rs.getString(6));
-            p.setPublication(rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(4));
-            p.setField(rs.getString(11));
-            p.setDoi(rs.getString(12));
-            p.setAbstra(rs.getString(13));
+            p.setPublication(rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(4));
+            p.setField(rs.getString(12));
+            p.setDoi(rs.getString(13));
+            p.setAbstra(rs.getString(14));
             paper.add(p);
 	    }
 	}
@@ -131,10 +131,10 @@ public class SLSearch extends ActionSupport {
             // basic info
             p.setAuthor(rs.getString(5));
             p.setTitle(rs.getString(6));
-            p.setPublication(rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(4));
-            p.setField(rs.getString(11));
-            p.setDoi(rs.getString(12));
-            p.setAbstra(rs.getString(13));
+            p.setPublication(rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(4));
+            p.setField(rs.getString(12));
+            p.setDoi(rs.getString(13));
+            p.setAbstra(rs.getString(14));
             paper.add(p);
         }
 

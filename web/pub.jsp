@@ -85,7 +85,7 @@
                             while (rs1.next()) {
                                 String name = rs1.getString(2);
                                 String abbr = rs1.getString(3);
-                                out.println("<p id='" + name + "'><a href='#'>" + name + " (" + abbr + ")</a></p>");
+                                out.println("<p id='" + abbr + "'><a href='#'>" + name + " (" + abbr + ")</a></p>");
                             }
                         %>
                         <br/><br/>
@@ -99,7 +99,7 @@
                             while (rs2.next()) {
                                 String name = rs2.getString(2);
                                 String abbr = rs2.getString(3);
-                                out.println("<p id='" + name + "'><a href='#'>" + name + " (" + abbr + ")</a></p>");
+                                out.println("<p id='" + abbr + "'><a href='#'>" + name + " (" + abbr + ")</a></p>");
                             }
                         %>
                         <br/><br/>

@@ -58,26 +58,26 @@ public class SLContent extends ActionSupport {
                 sql = "select * from paper.list where type = 'techreport'" ;
             }
             else {
-                sql = "select * from paper.list where publication = '" + content + "'" ;
+                sql = "select * from paper.list where abbr = '" + content + "'" ;
             }
         }
         
-        sql += " order by year" ;
+        sql += " order by year DESC" ;
         
         ResultSet rs = stmt.executeQuery(sql);
-        // data columns: id, bib, type, year, author, title, publication, vol, no, pages, field, doi, abstract
+        // data columns: id, bib, type, year, author, title, publication, abbr, vol, no, pages, field, doi, abstract
         while(rs.next()) {
         	Paper p = new Paper() ;
             // bib info
             p.setBib(rs.getString(2));
             p.setType(rs.getString(3));
             // basic info
-        	p.setAuthor(rs.getString(5));
-    		p.setTitle(rs.getString(6));
-    		p.setPublication(rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(4));
-            p.setField(rs.getString(11));
-            p.setDoi(rs.getString(12));
-            p.setAbstra(rs.getString(13));
+            p.setAuthor(rs.getString(5));
+            p.setTitle(rs.getString(6));
+            p.setPublication(rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(4));
+            p.setField(rs.getString(12));
+            p.setDoi(rs.getString(13));
+            p.setAbstra(rs.getString(14));
     		paper.add(p);
         }
 
