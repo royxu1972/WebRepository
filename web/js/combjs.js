@@ -234,7 +234,7 @@ function showpage(json, num) {
                     "<p class='pull-right' id='accordion'>" +
                     "<a class='red_link' data-toggle='collapse' data-parent='#accordion' href='#a_collapse" + i + "'>Abstract</a>&nbsp;&nbsp;|&nbsp;&nbsp;" +
                     "<a class='red_link' data-toggle='collapse' data-parent='#accordion' href='#b_collapse" + i + "'>BibTex</a>&nbsp;&nbsp;|&nbsp;&nbsp;" +
-                    "<a class='red_link' href='" + json[i].doi + "' " + target + ">DOI</a></p>" +
+                    "<a class='red_link' href='http://dx.doi.org/" + json[i].doi + "' " + target + ">DOI</a></p>" +
                 "</div>" +
             "</div>" +
             "<div class='row'>" +

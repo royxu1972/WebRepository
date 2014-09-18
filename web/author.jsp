@@ -74,6 +74,10 @@
                         <!--  <p><a href="#">(and a link to google author or personal home page)</a></p>-->
                         <br>
                     </div>
+
+                    <div class="col-md-12">
+                        <div id="sta"></div>
+                    </div>
                 </div>
 
                 <!-- main list -->

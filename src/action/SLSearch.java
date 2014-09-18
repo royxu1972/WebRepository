@@ -146,16 +146,39 @@ public class SLSearch extends ActionSupport {
         ResultSet rs = stmt.executeQuery(sql); 
         while(rs.next()) {
             Paper p = new Paper() ;
+
             // bib info
             p.setBib(rs.getString(2));
             p.setType(rs.getString(3));
+
             // basic info
             p.setAuthor(rs.getString(5));
             p.setTitle(rs.getString(6));
-            p.setPublication(rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(4));
             p.setField(rs.getString(12));
-            p.setDoi(rs.getString(13));
-            p.setAbstra(rs.getString(14));
+
+            String abbr = rs.getString(8) ;
+            if( rs.wasNull() )  abbr = "" ;
+
+            String vol = rs.getString(9) ;
+            if( rs.wasNull() )  vol = "" ;
+
+            String no = rs.getString(10) ;
+            if( rs.wasNull() )  no = "" ;
+
+            String page = rs.getString(11) ;
+            if( rs.wasNull() )  page = "" ;
+
+            p.setPublication(rs.getString(7), abbr, vol, no, page, rs.getString(4));
+
+            // doi and abstract
+            String doi = rs.getString(13) ;
+            if( rs.wasNull() )  doi = "" ;
+            p.setDoi(doi);
+
+            String abs = rs.getString(14) ;
+            if(rs.wasNull())    abs = "" ;
+            p.setAbstra(abs);
+
             paper.add(p);
         }
 

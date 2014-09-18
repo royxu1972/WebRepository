@@ -12,6 +12,7 @@ public class Paper {
     // publication
     private String fullpublication ;
 	private String publication ;
+    private String abbr ;
     private String vol ;
     private String no ;
     private String pages ;
@@ -65,6 +66,7 @@ public class Paper {
     */
     public void setPublication(String pub, String abbr, String vol, String no, String pages, String year) {
         this.publication = pub ;
+        this.abbr = abbr ;
         this.vol = vol ;
         this.no = no ;
         this.pages = pages ;
@@ -92,6 +94,11 @@ public class Paper {
     public String getPublication() {
         return publication ;
     }
+    public String getAbbr() { return abbr ; }
+    public String getVol() { return vol ; }
+    public String getNo() { return no ; }
+    public String getPages() { return pages ; }
+    public String getYear() { return year ; }
     public String getFullpublication() {
         return fullpublication ;
 	}
@@ -108,7 +115,7 @@ public class Paper {
         if( a.equals("") )
             this.doi = "#" ;
         else
-            this.doi = "http://dx.doi.org/" + a ;
+            this.doi = a ;
     }
 
     public String getAbstra() { return abstra ; }

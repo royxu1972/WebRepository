@@ -64,6 +64,12 @@
                             <li id="pa_name"></li>
                         </ul>
                     </div>
+
+                    <div>
+                        <div id="sta" class="col-md-6"></div>
+                        <div class="col-md-6">
+                        </div>
+                    </div>
                 </div>
 
                 <!-- main list -->

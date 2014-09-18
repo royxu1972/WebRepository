@@ -20,27 +20,4 @@
             </result>
         </action>
     </package>
-
-    <!-- cite download -->
-    <package name="citeload" extends="json-default">
-        <action name="citeAction" class="action.CiteLoad">
-            <result type="json">
-                <param name="root">data1</param>
-            </result>
-        </action>
-    </package>
-
-    <package name="download" extends="struts-default">
-        <action name="downAction" class="action.DownLoad">
-            <result name="success" type="stream">
-                <param name="contentType">application/octet-stream</param>
-                <param name="contentDisposition">
-                    attachment;filename="CiteList.txt"
-                </param>
-                <param name="inputName">DownloadStream</param>
-            </result>
-        </action>
-    </package>
-
-
 </struts>
