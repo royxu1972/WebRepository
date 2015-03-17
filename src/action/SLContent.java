@@ -1,17 +1,29 @@
 package action;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import net.sf.json.JSONArray;
 import com.opensymphony.xwork2.ActionSupport;
-import java.sql.* ;
+import java.sql.PreparedStatement ;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
 import model.Paper;
 
 public class SLContent extends ActionSupport {
 
 	private static final long serialVersionUID = 7044325217725864319L;  
 
-	// 接收参数 
+	// receive parameter
 	private String content ;
 	private String group ;  // group = all | author | field | pub
 
@@ -22,7 +34,7 @@ public class SLContent extends ActionSupport {
 		this.group = a ;
 	}
 
-	// 返回数据
+	// return data
 	private List<Paper> paper ;
 	private String data;
 
@@ -33,23 +45,24 @@ public class SLContent extends ActionSupport {
 		this.data = d ;
 	}
 
-	// 查询并返回结果
+	// do query
 	public String execute() throws Exception {
-		System.out.println("search " + group + ": " + content );
-		paper = new ArrayList<Paper>() ;
 
 		// connect to database
 		Class.forName("com.mysql.jdbc.Driver").newInstance();  
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/paper","root","123456");  
-        Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);  
-        
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/paper", "wayne", "123456");
+
         String sql = "" ;
-        if( group.equals("all") )
-        	sql = "select * from paper.list" ;
-        if( group.equals("author") )
-        	sql = "select * from paper.list where author LIKE '%" + content + "%'" ;
-        if( group.equals("field") )
-        	sql = "select * from paper.list where field = '" + content + "'" ;
+        PreparedStatement preState = null ;
+        if( group.equals("all") ) {
+            sql = "select * from paper.list";
+        }
+        if( group.equals("author") ) {
+            sql = "select * from paper.list where author LIKE ?";
+        }
+        if( group.equals("field") ) {
+            sql = "select * from paper.list where field = ?";
+        }
         if( group.equals("pub") ) {
             if( content.equals("phd") ) {
                 sql = "select * from paper.list where type = 'phdthesis'" ;
@@ -58,57 +71,73 @@ public class SLContent extends ActionSupport {
                 sql = "select * from paper.list where type = 'techreport'" ;
             }
             else {
-                sql = "select * from paper.list where abbr = '" + content + "'" ;
+                sql = "select * from paper.list where abbr = ?" ;
             }
         }
-        
         sql += " order by year DESC" ;
-        
-        ResultSet rs = stmt.executeQuery(sql);
-        // data columns: id, bib, type, year, author, title, publication, [abbr], [vol], [no], [pages], field, [doi], [abstract]
+
+        preState = conn.prepareStatement(sql);
+        if( sql.indexOf('?') != -1 ) {
+            if( group.equals("author") )
+                preState.setString(1, "%" + content + "%");
+            else
+                preState.setString(1, content);
+        }
+        ResultSet rs = preState.executeQuery();
+        int rowCount = rs.getRow();
+
+        paper = new ArrayList<Paper>(rowCount) ;
+        // data columns:
+        // id, bib, type, year, author, title, publication, [abbr], [vol], [no], [pages], field, [doi]
         while(rs.next()) {
         	Paper p = new Paper() ;
 
-            // bib info
             p.setBib(rs.getString(2));
             p.setType(rs.getString(3));
-
-            // basic info
+            p.setYear(rs.getString(4));
             p.setAuthor(rs.getString(5));
             p.setTitle(rs.getString(6));
+            p.setPublication(rs.getString(7));
             p.setField(rs.getString(12));
 
-            String abbr = rs.getString(8) ;
-            if( rs.wasNull() )  abbr = "" ;
+            String abbr = rs.getString(8);
+            p.setAbbr( rs.wasNull() ? "" : abbr );
 
-            String vol = rs.getString(9) ;
-            if( rs.wasNull() )  vol = "" ;
+            String vol = rs.getString(9);
+            p.setVol( rs.wasNull() ? "" : vol );
 
-            String no = rs.getString(10) ;
-            if( rs.wasNull() )  no = "" ;
+            String no = rs.getString(10);
+            p.setNo( rs.wasNull() ? "" : no );
 
-            String page = rs.getString(11) ;
-            if( rs.wasNull() )  page = "" ;
+            String page = rs.getString(11);
+            p.setPages( rs.wasNull() ? "" : page );
 
-            p.setPublication(rs.getString(7), abbr, vol, no, page, rs.getString(4));
-
-            // doi and abstract
             String doi = rs.getString(13) ;
-            if( rs.wasNull() )  doi = "" ;
-            p.setDoi(doi);
-
-            String abs = rs.getString(14) ;
-            if(rs.wasNull())    abs = "" ;
-            p.setAbstra(abs);
+            p.setDoi( rs.wasNull() ? "" : doi );
 
     		paper.add(p);
         }
 
-		// json
-		JSONArray ja = JSONArray.fromObject(paper);   
-        //System.out.println( ja.toString() );   
-        this.data = ja.toString();  
-        return SUCCESS;  	
+		/* json
+		JSONArray ja = JSONArray.fromObject(paper);
+        this.data = ja.toString();
+        */
+
+        /* jackson */
+        OutputStream out = new ByteArrayOutputStream();
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            mapper.writeValue(out, paper);
+        } catch (JsonGenerationException e) {
+            e.printStackTrace();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.data = out.toString();
+
+        return SUCCESS;
 	}
 
 }

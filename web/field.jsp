@@ -8,16 +8,24 @@
     <!-- Publication main -->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="wayne">
+    <meta name="description" content="combinatorial testing repository">
+    <meta name="keywords" content="repository, combinatorial testing, software testing, publication, research, paper">
+    <meta name="author" content="huayao">
 
     <title>Publication</title>
-    <!-- css -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap3.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/repository.css">
 
-    <script src="js/jquery.js"></script>
-    <script src="js/combjs.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/comb.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             // search field id
@@ -25,6 +33,8 @@
                 var para = "content=" + $(this).attr("id") + "&group=field";
                 search_now = $(this).attr("id");
                 search_type = "field";
+                $("#wait").show();
+                $("#main_list").hide();
                 $.ajax({
                     url: "contentAction.action",
                     type: "post",
@@ -72,59 +82,75 @@
                     </div>
                 </div>
 
+                <!-- waiting -->
+                <div id="wait" style="display:none" class="row">
+                    <div class="col-md-12 text-center">
+                        <h1><i class="fa fa-spinner fa-pulse fa-lg"></i></h1><br>
+                        <h4><h4>keep calm and data is loading ...</h4></h4>
+                    </div>
+                </div>
+
                 <div id="main_list" class="row">
                     <div class="col-md-12 well_field">
 
-                        <h3 id="model"><a href='#' class="none_dec"><i class="icon-chevron-right"></i> model</a></h3>
-                        <p> Model Studies on identifying the parameters, values, and the interrelations
-                            of parameters of SUT. </p>
-                        <p><a href="#" class="none_dec"><span class="label label-danger">learn more...</span></a></p>
-                        <br/>
+                        <h3 id="model"><a href='#' class="none_dec"><i class="fa fa-pencil-square-o fa-fw"></i> model</a></h3>
+                        <p> Modeling focuses on identifying parameters, values, and interactions and relations
+                            of software under test. It is the fundamental activity of combinatorial testing.</p>
+                        <br>
 
-                        <h3 id="generation"><a href='#' class="none_dec"><i class="icon-chevron-right"></i> geneartion</a></h3>
-                        <p> Generation studies on generating a small test suite effectively.
-                            As the minimum size is unknown, so methods have focused on fnding CAs that
-                            have as few test cases as possible. Mathematical and computational methods are both used.
-                            The former one can yield the best possible CAs in certain cases,
+                        <h3 id="generation"><a href='#' class="none_dec"><i class="fa fa-cogs fa-fw"></i> generation</a></h3>
+                        <p> Generation is the most popular research field in combinatorial testing.
+                            As the minimum size of a covering array is unknown,
+                            so proposed methods all focused on finding a covering array that
+                            have as few test cases as possible.
+                            Mathematical and computational methods are both used.
+                            The former one can yield the best possible covering arrays in certain cases,
                             but its application is restrict to sets of factors.
                             Hence, computational methods, which primarily use greedy strategies or
-                            search techniques to generate any types of CA, have dominated the literates.</p>
-                        <p><a href="#" class="none_dec"><span class="label label-danger">learn more...</span></a></p>
-                        <br/>
+                            search techniques to generate any types of covering array, have dominated the literates.</p>
+                        <br>
 
-                        <h3 id="constraint"><a href='#' class="none_dec"><i class="icon-chevron-right"></i> constraint</a></h3>
-                        <p> Constraints studies on avoiding invalid test cases in the test suite generation. </p>
-                        <p><a href="#" class="none_dec"><span class="label label-danger">learn more...</span></a></p>
-                        <br/>
+                        <h3 id="constraint"><a href='#' class="none_dec"><i class="fa fa-puzzle-piece fa-fw"></i> constraint</a></h3>
+                        <p> Constraint depicts the dependencies among parameters.
+                            As invalid combinations will prevent the execution of certain test cases,
+                            the constraint must be addressed to maintain the effectiveness
+                            of combinatorial testing.</p>
+                        <br>
 
-                        <h3 id="prioritization"><a href='#' class="none_dec"><i class="icon-chevron-right"></i> prioritization</a></h3>
-                        <p> the prioritization of the test suite.</p>
-                        <p><a href="#" class="none_dec"><span class="label label-danger">learn more...</span></a></p>
-                        <br/>
+                        <h3 id="prioritization"><a href='#' class="none_dec"><i class="fa fa-sort fa-fw"></i> prioritization</a></h3>
+                        <p> Test suite prioritization can help reorder the test
+                            sequence to meet predefined metrics. By assigning different
+                            weights to different combinations, we can ensure that important test cases
+                            are tested before the testing is terminated after running a subset of the
+                            test suite.</p>
+                        <br>
 
-                        <h3 id="diagnosis"><a href='#' class="none_dec"><i class="icon-chevron-right"></i> fault diagnosis</a></h3>
-                        <p> Failure characterization and diagnosis studies on fixing the detected faults.</p>
-                        <p><a href="#" class="none_dec"><span class="label label-danger">learn more...</span></a></p>
-                        <br/>
+                        <h3 id="diagnosis"><a href='#' class="none_dec"><i class="fa fa-bug fa-fw"></i> fault diagnosis</a></h3>
+                        <p> Applying combinatorial testing can guarantee all failures
+                            that are caused by a fixed number of parameters to be detected,
+                            but it cannot identify the concrete failure causing combinations.
+                            When a fault is exposed, the diagnosis process is desired
+                            to locate and remove the fault.</p>
+                        <br>
 
-                        <h3 id="evaluation"><a href='#' class="none_dec"><i class="icon-chevron-right"></i> evaluation</a></h3>
+                        <h3 id="evaluation"><a href='#' class="none_dec"><i class="fa fa-area-chart fa-fw"></i> evaluation</a></h3>
                         <p> Evaluation and metric studies on measuring the combination coverage of CT and the
                             effectiveness of fault detection, and the degree to which CT contributes
                             to the improvement of software quality. </p>
-                        <p><a href="#" class="none_dec"><span class="label label-danger">learn more...</span></a></p>
-                        <br/>
+                        <br>
 
-                        <h3 id="application"><a href='#' class="none_dec"><i class="icon-chevron-right"></i> application</a></h3>
-                        <p> Application studies on practical testing procedure for CT and reporting
-                            the results of the CT application. </p>
-                        <p><a href="#" class="none_dec"><span class="label label-danger">learn more...</span></a></p>
-                        <br/>
+                        <h3 id="application"><a href='#' class="none_dec"><i class="fa fa-wrench fa-fw"></i> application</a></h3>
+                        <p> Application contains practical testing procedures on different types of software systems.
+                            The quantity and variety of applications are good indicators to reflect the popularity
+                            of different testing methods. In combinatorial testing, the application is the second most
+                            popular research eld
+                        </p>
+                        <br>
 
-                        <h3 id="survey"><a href='#' class="none_dec"><i class="icon-chevron-right"></i> survey</a></h3>
-                        <p> Survey summarizes the current researches in CT.</p>
-                        <p><a href="#" class="none_dec"><span class="label label-danger">learn more...</span></a></p>
-                        <br/>
-
+                        <h3 id="survey"><a href='#' class="none_dec"><i class="fa fa-bookmark fa-fw"></i> survey</a></h3>
+                        <p>The survey of combinatorial testing, or some sub fields.</p>
+                        <br>
+                        <br><br>
                     </div>
                 </div>
                 <!-- main_list -->
@@ -162,6 +188,6 @@
 <!-- footer -->
 <jsp:include page="template_bottom.jsp"/>
 
-<script src="js/bootstrap3.js"></script>
+<script src="./js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -4,23 +4,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Publication main -->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="author" content="wayne">
+    <!-- Publication main -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="combinatorial testing repository">
+    <meta name="keywords" content="repository, combinatorial testing, software testing, publication, research, paper">
+    <meta name="author" content="huayao">
 
-<title>Statistic</title>
-<!-- css -->
-<link rel="stylesheet" type="text/css" href="css/bootstrap3.css">
-<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="css/repository.css">
+    <title>Statistic</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/repository.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*" %>
 <%
     // search year count
     Class.forName("com.mysql.jdbc.Driver").newInstance();
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/paper", "root", "123456");
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/paper", "wayne", "123456");
     Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
     String sql1 = "select * from paper.cumulative";
     ResultSet rs1 = stmt.executeQuery(sql1);
@@ -89,8 +98,8 @@
     stmt.close();
 %>
 
-
-<script src="js/jquery.js"></script>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
 <script type="text/javascript">
     $(function () {
         var chart1;
@@ -99,14 +108,14 @@
 
         $("#show_c1").click(function () {
             $("#btn_group").hide();
-            $("#back_home").html("<a href='/statistic.jsp'>statistic</a>");
+            $("#back_home").html("<a href='./statistic.jsp'>statistic</a>");
             $("#current").html("<span class='divider'></span>number of publication");
             $("#pbread").fadeIn("slow");
             $("#container-chart").fadeIn("slow");
 
             $('#container-chart').highcharts({
                 title: {
-                    text: 'The Number of Publications in the Year from <%=firstyear%> to <%=lastyear%>',
+                    text: 'The Number of Publications from <%=firstyear%> to <%=lastyear%>',
                     x: -20 //center
                 },
                 xAxis: {
@@ -150,7 +159,7 @@
 
         $("#show_c2").click(function () {
             $("#btn_group").hide();
-            $("#back_home").html("<a href='/statistic.jsp'>statistic</a>");
+            $("#back_home").html("<a href='./statistic.jsp'>statistic</a>");
             $("#current").html("<span class='divider'></span>ratio of field");
             $("#pbread").fadeIn("slow");
             $("#container-chart").fadeIn("slow");
@@ -177,7 +186,7 @@
                     plotShadow: false
                 },
                 title: {
-                    text: 'The Ratio of CT Research Fields'
+                    text: 'The Distributation of CT Research Fields'
                 },
                 tooltip: {
                     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -221,7 +230,7 @@
 
         $("#show_c3").click(function () {
             $("#btn_group").hide();
-            $("#back_home").html("<a href='/statistic.jsp'>statistic</a>");
+            $("#back_home").html("<a href='./statistic.jsp'>statistic</a>");
             $("#current").html("<span class='divider'></span>number of field");
             $("#pbread").fadeIn("slow");
             $("#container-chart").fadeIn("slow");
@@ -326,8 +335,8 @@
 
                     <div class="col-md-3">
                         <div id="show_c2"><a href="#" class="img-thumbnail"><img src="image/chart2.ico"/></a></div>
-                        <h4>Ratio of Field</h4>
-                        <p>The Ratio of CT Research Fields</p>
+                        <h4>Distribtation of Field</h4>
+                        <p>The Distribtation of CT Research Fields</p>
                     </div>
 
                     <div class="col-md-1"></div>
@@ -357,8 +366,7 @@
 <!-- footer -->
 <jsp:include page="template_bottom.jsp"/>
 
-<script src="js/bootstrap3.js"></script>
-<script src="js/highcharts.js"></script>
-<script src="js/exporting.js"></script>
+<script src="./js/highcharts.js"></script>
+<script src="./js/exporting.js"></script>
 </body>
 </html>

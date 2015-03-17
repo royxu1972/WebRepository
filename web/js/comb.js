@@ -18,10 +18,10 @@
  */
 var json ;
 var json_data ;
-var pagesize = 15 ;  // 单页条目数 
-var page ;           // 页数 
-var count = 5 ;      // 页码范围 
-var current ;        // 当前页面 
+var pagesize = 15 ;  // the size of each page
+var page ;           // the number of pages
+var count = 5 ;      // page interval
+var current ;        // current page
 
 $(document).ready(function() {
 	/*
@@ -85,24 +85,19 @@ $(document).ready(function() {
 	
 	/*
 	 * Cite Download
-	 */
 	$("#downbtn").click(function() { 
 		//alert(json_data);
 		json_data = json_data.replace(/\&/g,"%26"); 
 		$.ajax({
-			// 请求的url 
-			url : "citeAction.action",  
-			// 发送方式  
+			url : "citeAction.action",
 			type : "post",
-			// 参数 
 			data: "jsda=" + json_data ,
-			// 回传函数  
 			success : function() {
 				//location.href = "CiteList.txt";
 				location.href = "downAction.action" ; 
-			},
+			}
 		}); 	
-	});
+	});*/
 });
 
 /*
@@ -168,15 +163,19 @@ function showpagecount() {
 }
 
 /*
- * 显示结果
- * 用于 all | index | author | field | publication
+ * make the result show
+ * for all | index | author | field | publication
  */
 var search_now = "" ;   // search content
 var search_type = "" ;  // all | index | author | field | publication
 
 function showsearh(data) {
+
 	json = eval( "("+data+")" ); 
 	json_data = data ;
+
+	// waiting end
+	$("#wait").hide();
 
     // when searching index, it may return nothing
     if (search_type == "index" ) {
@@ -186,14 +185,11 @@ function showsearh(data) {
             $("#search_none").fadeIn("slow");
             return;
         }
-        else {
-            $("#sh1").hide();
-            $("#sh2").hide();
-        }
     }
 
 	page = parseInt(( json.length + pagesize - 1 ) / pagesize) ;
 	current = 1 ;
+
 	showpage(json, current);
 	
 	if( page > 1 ) {
@@ -212,13 +208,13 @@ function showsearh(data) {
 function showpage(json, num) {
 	$(".added").empty();
 	var start = ( num - 1 ) *  pagesize ;
-    var target = "" ;
+    var doi_text = "" ;
 	for(var i = start ; i < start + pagesize && i < json.length ; i++ ) {
-        if( json[i].doi == "#" ) {
-            target = "" ;
-        }
+        if( json[i].doi != "" ) {
+			doi_text = "<a class='red_link' href='http://dx.doi.org/" + json[i].doi + "' target='_blank'>DOI</a>" ;
+		}
         else {
-            target = "target='_blank'" ;
+			doi_text = "DOI" ;
         }
         // new row in table
         $("#rstable").append("<tr class='added'><td>" + (i+1) + "</td><td>" +
@@ -226,23 +222,19 @@ function showpage(json, num) {
                 "<div class='col-md-12'>" +
                     "<p>" + json[i].author + "</p>" +
                     "<p><strong>" + json[i].title + "</strong></p>" +
-                    "<p><em>" + json[i].fullpublication + "</em></p>" +
+                    "<p><em>" + getFullPublication( json[i] ) + "</em></p>" +
                 "</div>" +
             "</div>" +
             "<div class='row'>" +
                 "<div class='col-md-12'>" +
                     "<p class='pull-right' id='accordion'>" +
-                    "<a class='red_link' data-toggle='collapse' data-parent='#accordion' href='#a_collapse" + i + "'>Abstract</a>&nbsp;&nbsp;|&nbsp;&nbsp;" +
                     "<a class='red_link' data-toggle='collapse' data-parent='#accordion' href='#b_collapse" + i + "'>BibTex</a>&nbsp;&nbsp;|&nbsp;&nbsp;" +
-                    "<a class='red_link' href='http://dx.doi.org/" + json[i].doi + "' " + target + ">DOI</a></p>" +
+                    doi_text + "</p>" +
                 "</div>" +
             "</div>" +
             "<div class='row'>" +
-                "<div id='a_collapse" + i + "' class='col-md-12 panel panel-default collapse'>" +
-                    "<div class='panel-body'>" +json[i].abstra + "</div>" +
-                "</div>" +
                 "<div id='b_collapse" + i + "' class='col-md-12 panel panel-default collapse'>" +
-                    "<div class='panel-body'>" +json[i].bib_citation +"</div>" +
+                    "<div class='panel-body'>" + getBibEntry(json[i]) +"</div>" +
                 "</div>" +
             "</div>" +
             "</td></tr>") ;
@@ -253,7 +245,6 @@ function showpage(json, num) {
 	if( search_type != "all" || search_type != "index") {
 		$("#pa_main").html("<a href='#'>" + search_type + "</a>");
 		$("#pa_name").html(search_now);
-		$("#main_list").hide();
 	}
 	
 	$("#pa").fadeIn("slow");
@@ -265,8 +256,126 @@ function showpage(json, num) {
     else {
         $("#sta").html("<p><span class='label label-success'>" + json.length + "</span> papers included</p>");
     }
-	//$("#result_list").show();
     $("#result_list").fadeIn("slow") ;
 }
+
+// get full publication text
+function getFullPublication( jn ) {
+	var type = jn.type ;
+	var publication = jn.publication ;
+	var abbr = jn.abbr ;
+	var vol = jn.vol ;
+	var no = jn.no ;
+	var pages = jn.pages ;
+	var year = jn.year ;
+
+	if( abbr != "" && abbr != "phd" && abbr != "book" && abbr != "tech" )
+		publication += " (" +  abbr + ")" ;
+
+	if( type == "article" ) {
+		return publication + ", " + vol + "(" + no + "): " + pages + ", " + year ;
+	}
+	else if( type == "inproceedings" ) {
+		return publication + ", pp." + pages + ", " + year ;
+	}
+	else if( type == "phdthesis" || type == "book" ) {
+		return publication + ", " + year ;
+	}
+	else if( type == "techreport" ) {
+		return publication + ", " + no + ", " + year ;
+	}
+	else {
+		return publication ;
+	}
+}
+
+// get bib entry for html
+function getBibEntry( jn ) {
+	var re = "" ;
+	/*
+	@article{$bib,
+		author = {$author},
+		title = {$title},
+		journal = {$publication},
+		volume = {$vol},
+		number = {$no},
+		pages = {$pages},
+		year = {$year},
+		doi = {$doi}
+	}
+	*/
+	if( jn.type == "article" ) {
+		re += "@article{" + jn.bib + ",<br/>" +
+		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;author = {" + jn.author + "},<br/>" +
+		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title = {" + jn.title + "},<br/>" +
+		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;journal = {" + jn.publication + "},<br/>" +
+		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;volume = {" + jn.vol + "},<br/>" +
+		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number = {" + jn.no + "},<br/>" +
+		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pages = {" + jn.pages + "},<br/>" +
+		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;year = {" + jn.year + "},<br/>" +
+		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;doi = {" + jn.doi + "}<br/>" +
+		"}";
+	}
+	/*
+	@inproceedings{$bib,
+		author = {$author},
+		title = {$title},
+		booktitle = {$publication},
+		pages = {$pages},
+		year = {$year},
+		doi = {$doi}
+	}
+	*/
+	else if( jn.type == "inproceedings" ) {
+		re += "@inproceedings{" + jn.bib + ",<br/>" +
+		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;author = {" + jn.author + "},<br/>" +
+		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title = {" + jn.title + "},<br/>" +
+		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;booktitle = {" + jn.publication + "},<br/>" +
+		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pages = {" + jn.pages + "},<br/>" +
+		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;year = {" + jn.year + "},<br/>" +
+		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;doi = {" + jn.doi + "}<br/>" +
+		"}";
+	}
+	/*
+	@inproceedings{$bib,
+		author = {$author},
+		title = {$title},
+		school = {$publication},
+		year = {$year}
+	}
+	*/
+	else if( jn.type == "phdthesis" ) {
+		re += "@inproceedings{" + bib + ",<br/>" +
+		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;author = {" + jn.author + "},<br/>" +
+		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title = {" + jn.title + "},<br/>" +
+		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;school = {" + jn.publication + "},<br/>" +
+		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;year = {" + jn.year + "}<br/>" +
+		"}";
+	}
+	/*
+	@techreport{$bib,
+		author = {$author},
+		title = {$title},
+		institution = {$publication},
+		number = {$no},
+		year = {$year}
+	}
+	*/
+	else if( jn.type == "techreport" ) {
+		re += "@techreport{" + bib + ",<br/>" +
+		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;author = {" + jn.author + "},<br/>" +
+		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title = {" + jn.title + "},<br/>" +
+		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;institution = {" + jn.publication + "},<br/>" +
+		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number = {" + jn.no + "},<br/>" +
+		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;year = {" + jn.year + "}<br/>" +
+		"}";
+	}
+	else {
+		re = "no bib citation" ;
+	}
+	return re ;
+}
+
+
 
 

@@ -8,16 +8,24 @@
     <!-- Publication main -->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="wayne">
+    <meta name="description" content="combinatorial testing repository">
+    <meta name="keywords" content="repository, combinatorial testing, software testing, publication, research, paper">
+    <meta name="author" content="huayao">
 
     <title>Repository Search</title>
-    <!-- css -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap3.css">
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/repository.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/repository.css">
 
-    <script src="js/jquery.js"></script>
-    <script src="js/combjs.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/comb.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             // press enter button
@@ -29,7 +37,7 @@
             });
             // search click
             $("#sbtn").click(function () {
-                str = $("#search_content").val().trim();
+                var str = $("#search_content").val().trim();
                 if (str == "") {
                     $('#myModal').modal('show');
                     return;
@@ -37,36 +45,19 @@
                 var para = "content=" + str;
                 search_now = str;
                 search_type = "index";
-                //alert(para);
+                $("#wait").show();
+                $("#sh1").hide();
+                $("#sh2").hide();
                 $.ajax({
-                    // 请求的url
                     url: "searchAction.action",
-                    // 发送方式
                     type: "post",
-                    // 接受数据格式
                     dataType: "json",
-                    // 参数
                     data: para,
-                    // 回传函数
                     success: showsearh
                 });
             });
         });
     </script>
-
-    <%@ page import="java.util.*" %>
-    <%@ page import="java.sql.*" %>
-    <%
-        // search table paper
-        Class.forName("com.mysql.jdbc.Driver").newInstance();
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/paper", "root", "123456");
-        Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        String sql = "select * from paper.list";
-        ResultSet rs = stmt.executeQuery(sql);
-        //获取记录总数
-        rs.last();
-        int RowCount = rs.getRow();
-    %>
 </head>
 
 <body>
@@ -86,19 +77,16 @@
                 <jsp:param name="para" value="index"/>
             </jsp:include>
 
-            <!-- data part -->
-            <div class="col-md-10">
-
+            <!-- -->
+            <div class="col-md-9 col-md-offset-1">
                 <!-- search 1 -->
-                <div id="sh1" class="row well_search1">
-                    <div class="col-md-12">
-                        <h3>All <span class="label label-success main_label">
-                        <%=RowCount%></span> relevant publications are included</h3>
-                    </div>
+                <div id="sh1" class="well_search1">
+                    <h3>All <span class="label label-success main_label">
+                        319</span> relevant publications are included</h3>
                 </div>
 
                 <!-- search 2 -->
-                <div id="sh2" class="row well_search2">
+                <div id="sh2" class="well_search2">
                     <div class="col-md-10">
                         <form role="form">
                             <div class="form-group">
@@ -112,26 +100,22 @@
                         <button id="sbtn" type="button" class="btn btn-primary search_btn">Search</button>
                     </div>
                 </div>
+            </div>
 
-                <!-- advanced option
-                <div class="row well-search2">
-                     <div class="col-md-12">
-                         <p id="advop"><a href="#">advanced options</a></p>
-                         <div id="advanced" style="display:none">
-                            <div class="input-group">
-                            <span class="add-on">Author</span><input id="ad_author" size="16" type="text">
-                            </div>
-                            <div class="input-prepend">
-                            <span class="add-on">Year</span><input id="ad_year" size="16" type="text">
-                            </div>
-                         </div>
-                     </div>
-                </div>-->
-
+            <!-- data part -->
+            <div class="col-md-10">
                 <!-- bread crumb -->
                 <!-- only display sta -->
                 <div id="pa" style="display:none" class="row-fluid">
-                    <div id="sta" class="col-md-6"></div>
+                    <div id="sta" class="col-md-12"></div>
+                </div>
+
+                <!-- waiting -->
+                <div id="wait" style="display:none" class="row">
+                    <div class="col-md-12 text-center">
+                        <h1><i class="fa fa-spinner fa-pulse fa-lg"></i></h1><br>
+                        <h4><h4>keep calm and data is loading ...</h4></h4>
+                    </div>
                 </div>
 
                 <!-- table -->
@@ -153,7 +137,7 @@
                 <div id="search_none" style="display:none;padding-left:60px" class="row">
                     <div class="alert alert-warning">
                         <h4 class="alert-heading">No relevant papers are found in our database</h4>
-                        please change your key word or see the "All" in paper list
+                        <p>please change your key words, or click <em>All</em> for the whole paper list<p>
                     </div>
                 </div>
 
@@ -187,6 +171,6 @@
     </div>
 </div>
 
-<script src="js/bootstrap3.js"></script>
+<script src="./js/bootstrap.min.js"></script>
 </body>
 </html>

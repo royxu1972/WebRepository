@@ -18,4 +18,9 @@
         <welcome-file>index.jsp</welcome-file>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
+
+    <error-page>
+        <location>/pages/missing.html</location>
+    </error-page>
+
 </web-app>

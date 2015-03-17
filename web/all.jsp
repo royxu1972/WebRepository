@@ -8,32 +8,36 @@
     <!-- Publication main -->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="wayne">
+    <meta name="description" content="combinatorial testing repository">
+    <meta name="keywords" content="repository, combinatorial testing, software testing, publication, research, paper">
+    <meta name="author" content="huayao">
 
     <title>Publication</title>
-    <!-- css -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap3.css">
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/repository.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/repository.css">
 
-    <script src="js/jquery.js"></script>
-    <script src="js/combjs.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/comb.js"></script>
     <script type="text/javascript">
         // search all content
         $(document).ready(function () {
             var para = "content=all&group=all";
             search_now = "all";
             search_type = "all";
+            $("#wait").show();
             $.ajax({
-                // 请求的url
                 url: "contentAction.action",
-                // 发送方式
                 type: "post",
-                // 接受数据格式
                 dataType: "json",
-                // 参数
                 data: para,
-                // 回传函数
                 success: showsearh
             });
         });
@@ -61,13 +65,21 @@
             <div class="col-md-10">
                 <!-- bread crumb -->
                 <!-- only display sta -->
-                <div id="pa" style="display:none" class="row-fluid">
+                <div id="pa" style="display:none" class="row">
                     <div class="row">
-                        <div id="sta" class="col-md-6">
+                        <div id="sta" class="col-md-12">
                         </div>
                         <!--<div class="col-md-6">
                         button id="downbtn" class="btn btn-xs btn-info pull-right">Cite Export</button>
                         </div>-->
+                    </div>
+                </div>
+
+                <!-- waiting -->
+                <div id="wait" style="display:none" class="row">
+                    <div class="col-md-12 text-center">
+                        <h1><i class="fa fa-spinner fa-pulse fa-lg"></i></h1><br>
+                        <h4>keep calm and data is loading ...</h4>
                     </div>
                 </div>
 
@@ -102,6 +114,6 @@
 <!-- footer -->
 <jsp:include page="template_bottom.jsp"/>
 
-<script src="js/bootstrap3.js"></script>
+<script src="./js/bootstrap.min.js"></script>
 </body>
 </html>
