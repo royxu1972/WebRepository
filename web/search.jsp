@@ -60,6 +60,19 @@
     </script>
 </head>
 
+<%@ page import="java.util.*" %>
+<%@ page import="java.sql.*" %>
+<%
+    // search table paper.Author
+    Class.forName("com.mysql.jdbc.Driver").newInstance();
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/paper", "wayne", "123456");
+    Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+    String sql = "select count(*) as rowCount from paper.list";
+    ResultSet rs = stmt.executeQuery(sql);
+    rs.next();
+    int rowCount = rs.getInt("rowCount");
+%>
+
 <body>
 <!-- Wrap all page content here -->
 <div id="wrap">
@@ -77,27 +90,31 @@
                 <jsp:param name="para" value="index"/>
             </jsp:include>
 
-            <!-- -->
-            <div class="col-md-9 col-md-offset-1">
-                <!-- search 1 -->
-                <div id="sh1" class="well_search1">
-                    <h3>All <span class="label label-success main_label">
-                        319</span> relevant publications are included</h3>
-                </div>
+            <!-- search part -->
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-11 col-sm-12">
+                        <!-- search 1 -->
+                        <div id="sh1" class="well_search">
+                            <h3>All <span class="label label-success main_label">
+                            <%=rowCount%></span> publications are included</h3>
+                        </div>
 
-                <!-- search 2 -->
-                <div id="sh2" class="well_search2">
-                    <div class="col-md-10">
-                        <form role="form">
-                            <div class="form-group">
-                                <input class="form-control" id="search_content" size="16"
-                                       placeholder="author, title, publication, ..." type="text">
-                                <input type="hidden" id="ad_order" value="year">
+                        <!-- search 2 -->
+                        <div id="sh2" class="row">
+                            <div class="col-md-9 col-sm-12">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <input class="form-control" id="search_content" size="16"
+                                               placeholder="author, title, publication, ..." type="text">
+                                        <input type="hidden" id="ad_order" value="year">
+                                    </div>
+                                </form>
                             </div>
-                        </form>
-                    </div>
-                    <div class="col-md-2">
-                        <button id="sbtn" type="button" class="btn btn-primary search_btn">Search</button>
+                            <div class="col-md-3 col-sm-4">
+                                <button id="sbtn" type="button" class="btn btn-primary col-md-8">Search</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

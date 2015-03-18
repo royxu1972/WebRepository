@@ -42,15 +42,15 @@ String par = request.getParameter("para");
         <%}%>
         
         <%if( par.equals("field") ){%>
-        <a id="left_back" href="#" class="list-group-item active">Field</a>
+        <a id="left_back" href="#" class="list-group-item active">Research Field</a>
         <%}else{%>
-        <a href="./field.jsp" class="list-group-item">Field</a>
+        <a href="./field.jsp" class="list-group-item">Research Field</a>
         <%}%>
         
         <%if( par.equals("publication") ){%>
-        <a id="left_back" href="#" class="list-group-item active">Publication</a>
+        <a id="left_back" href="#" class="list-group-item active">Publication Venue</a>
         <%}else{%>
-        <a href="./pub.jsp" class="list-group-item">Publication</a>
+        <a href="./pub.jsp" class="list-group-item">Publication Venue</a>
         <%}%>
     </div>
 </div>

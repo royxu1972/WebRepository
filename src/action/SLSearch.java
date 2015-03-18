@@ -59,8 +59,10 @@ public class SLSearch extends ActionSupport {
 		preState.setString(4, "%" + content + "%");
 
         ResultSet rs = preState.executeQuery();
+        rs.last();
         int rowCount = rs.getRow();
 
+        rs.beforeFirst();
         paper = new ArrayList<Paper>(rowCount) ;
         while(rs.next()) {
             Paper p = new Paper() ;

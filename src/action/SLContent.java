@@ -84,8 +84,10 @@ public class SLContent extends ActionSupport {
                 preState.setString(1, content);
         }
         ResultSet rs = preState.executeQuery();
+        rs.last();
         int rowCount = rs.getRow();
 
+        rs.beforeFirst();
         paper = new ArrayList<Paper>(rowCount) ;
         // data columns:
         // id, bib, type, year, author, title, publication, [abbr], [vol], [no], [pages], field, [doi]
