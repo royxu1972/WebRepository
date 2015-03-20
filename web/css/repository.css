@@ -88,6 +88,7 @@ html {
     padding-top: 30px;
     padding-bottom: 20px;
 }
+
 .my_center h3 ,
 .my_center p {
     text-align: center;
@@ -165,41 +166,58 @@ a.none_dec:link {
 
 /* new header */
 header {
-    display: table;
+    display: block;
     width: 100%;
     text-align: center;
     color: #ffffff;
-    background: url(../image/lib.jpg) no-repeat center center scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
+    background: url(../image/lib1.jpg) no-repeat center center scroll;
     background-size: cover;
-    -o-background-size: cover;
 }
 header .intro-text {
-    padding-top: 180px;
-    padding-bottom: 135px;
+    padding-top: 165px;
+    padding-bottom: 125px;
 }
 header .intro-text .intro-lead-in {
     margin-bottom: 25px;
-    font-size: 25px;
-    font-style: italic;
-    line-height: 30px;
+    font-size: 20px;
+    line-height: 20px;
 }
 header .intro-text .intro-heading {
-    margin-bottom: 40px;
-    font-size: 65px;
-    font-weight: 700;
-    line-height: 60px;
+    margin-bottom: 25px;
+    font-size: 50px;
+    font-weight: 500;
+    line-height: 50px;
 }
 
-/*
+
 @media(min-width:768px) {
     header .intro-text {
-        padding-top: 150px;
-        padding-bottom: 100px;
+        padding-top: 180px;
+        padding-bottom: 125px;
+    }
+    header .intro-text .intro-lead-in {
+        margin-bottom: 25px;
+        font-size: 30px;
+        line-height: 30px;
+    }
+    header .intro-text .intro-heading {
+        margin-bottom: 40px;
+        font-size: 65px;
+        font-weight: 600;
+        line-height: 65px;
+    }
+    .main_b {
+        padding: 10px 16px;
+        font-size: 18px;
+        line-height: 1.33;
+        border-radius: 6px;
+    }
+    .contact-center {
+        padding-left: 110px;
+        padding-right: 110px;
     }
 }
-*/
+
 .nav-poly {
     padding-top: 20px;
     padding-right: 20px;
