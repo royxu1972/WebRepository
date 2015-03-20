@@ -35,9 +35,11 @@ html {
  */
 
 /* index.jsp */
-.navbar-poly {
-    background-color: #2a3440;
-    border: none;
+.nav-poly {
+    padding-right: 30px;
+}
+.nav-poly li {
+    padding-right: 10px;
 }
 
 .hero {
@@ -46,7 +48,8 @@ html {
     font-size: 18px;
     font-weight: 200;
     line-height: 30px;
-    background-color: #2a3440;;
+    /*background-color: #2a3440;*/
+    background: url(../image/lib.jpg) no-repeat center center scroll;
 }
 
 .hero h1 {

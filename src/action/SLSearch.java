@@ -14,7 +14,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import model.Paper;
-import net.sf.json.JSONArray;
+//import net.sf.json.JSONArray;
 
 public class SLSearch extends ActionSupport {
 
