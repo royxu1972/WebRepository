@@ -209,6 +209,7 @@ function showpage(json, num) {
 	$(".added").empty();
 	var start = ( num - 1 ) *  pagesize ;
     var doi_text = "" ;
+
 	for(var i = start ; i < start + pagesize && i < json.length ; i++ ) {
         if( json[i].doi != "" ) {
 			doi_text = "<a class='red_link' href='http://dx.doi.org/" + json[i].doi + "' target='_blank'>DOI</a>" ;
@@ -345,7 +346,7 @@ function getBibEntry( jn ) {
 	}
 	*/
 	else if( jn.type == "phdthesis" ) {
-		re += "@inproceedings{" + bib + ",<br/>" +
+		re += "@phdthesis{" + jn.bib + ",<br/>" +
 		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;author = {" + jn.author + "},<br/>" +
 		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title = {" + jn.title + "},<br/>" +
 		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;school = {" + jn.publication + "},<br/>" +
@@ -362,7 +363,7 @@ function getBibEntry( jn ) {
 	}
 	*/
 	else if( jn.type == "techreport" ) {
-		re += "@techreport{" + bib + ",<br/>" +
+		re += "@techreport{" + jn.bib + ",<br/>" +
 		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;author = {" + jn.author + "},<br/>" +
 		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title = {" + jn.title + "},<br/>" +
 		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;institution = {" + jn.publication + "},<br/>" +
