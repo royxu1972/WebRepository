@@ -95,7 +95,7 @@
                         </div>
 
                         <!-- search 2 -->
-                        <div id="sh2" class="row">
+                        <div id="sh2" class="row well_search_2">
                             <div class="col-md-9 col-sm-12">
                                 <form role="form">
                                     <div class="form-group">

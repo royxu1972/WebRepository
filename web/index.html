@@ -14,9 +14,30 @@
     <link rel="stylesheet" href="./css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/repository.css">
 
-
     <script src="./js/jquery.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var x = getUrlParam('go');
+            if( x == "contact" ) {
+                $("#feature").hide();
+            }
+            else{
+                $("#contact").hide();
+            }
+            $("#goto").click(function(){
+                $("#feature").hide();
+                $("#contact").fadeIn("slow");
+            });
+        });
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r!=null)
+                return decodeURI(r[2]);
+            return null;
+        }
+    </script>
 </head>
 
 
@@ -27,7 +48,7 @@
             <ul class="list-inline pull-right nav-poly">
                 <li role="presentation"><a class="nav-btn" role="button" href="/">
                     <i class="fa fa-home fa-lg fa-fw"></i> GIST Home</a></li>
-                <li role="presentation"><a class="nav-btn" role="button" href="./contact.html">
+                <li id="goto" role="presentation"><a class="nav-btn" role="button" href="#">
                     <i class="fa fa-envelope fa-fw"></i> Contact</a></li>
             </ul>
 
@@ -42,8 +63,8 @@
         </div>
     </header>
 
-
-    <div class="container">
+    <!-- main container -->
+    <div id="feature" class="container">
         <div class="row my_center">
             <div class="col-sm-6 col-md-3">
                 <h3><img src="image/index1.ico"/></h3>
@@ -70,12 +91,31 @@
                 <p class="helvetica">bibTex citations are available for all papers</p>
             </div>
         </div>
-
     </div>
-    <!-- /container -->
 
-</div>
-<!-- /wrap -->
+    <!-- contact container -->
+    <div id="contact" class="container contact-center">
+        <p>This repository is designed and maintained by <strong>Huayao Wu</strong>,
+            who is currently a Ph.D. student in
+            <a href="http://gist.nju.edu.cn">GIST</a>,
+            National Key Laboratory for Novel Software Technology,
+            Nanjing University, China.</p>
+        <p>We warmly welcome any comments and suggestions about this repository.
+            If your paper is missed, please let us know.</p>
+        <p><i class="fa fa-envelope-o fa-fw"></i> hywu <em>#</em> outlook.com /
+            changhainie <em>#</em> nju.edu.cn</p>
+
+        <br>
+        <p>If you would like to cite this repository, please use the following BibTeX entry:</p>
+        <pre>@misc{wu:ct,
+    author = {Huayao Wu and Changhai Nie},
+    title = {Combinatorial Testing Repository},
+    note = {gist.nju.edu.cn/ct_repository},
+}</pre>
+    </div>
+
+
+</div><!-- /wrap -->
 
 <!-- footer -->
 <div id="footer">

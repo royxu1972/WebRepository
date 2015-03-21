@@ -15,7 +15,7 @@
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/"><i class="fa fa-home fa-lg"></i></a></li>
             <li><a href="./"><i class="fa fa-leanpub"></i></a></li>
-            <li><a href="./contact.html"><i class="fa fa-envelope"></i></a></li>
+            <li><a href="./index.html?go=contact"><i class="fa fa-envelope"></i></a></li>
         </ul>
     </div>
 </div>

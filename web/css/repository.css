@@ -136,6 +136,13 @@ a.none_dec:link {
     padding-top: 30px;
     padding-bottom: 10px;
 }
+.well_search h3 {
+    font-size: 26px;
+    line-height: 34px;
+}
+.well_search_2 {
+    padding-bottom: 30px;
+}
 
 /* statistic page */
 #btn_group {
@@ -230,7 +237,6 @@ header .intro-text .intro-heading {
     font-weight: bold;
     color: #ffffff;
 }
-.nav-poly > li > a:hover,
-.nav-poly > li > a:focus {
+.nav-poly > li > a:hover {
     color: #fed136;
 }
