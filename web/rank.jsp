@@ -24,7 +24,7 @@
         Class.forName("com.mysql.jdbc.Driver").newInstance();
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/paper", "wayne", "123456");
         Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        String sql = "select *, TSE*5 + TOSEM*5 + ESE*3 + IST*3 + JSS*3 + STVR*3 + FSE*5 + ICSE*5 + ASE*5 + ISSRE*3 + ISSTA*3 + ICSM*3 + Other as score from paper.rank order by score desc limit 50";
+        String sql = "select *, TSE*5 + TOSEM*5 + ESE*3 + IST*3 + JSS*3 + STVR*3 + FSE*5 + ICSE*5 + ASE*5 + ISSRE*3 + ISSTA*3 + ICSM*3 + Other as score from paper.rank order by score desc limit 30";
         ResultSet rs = stmt.executeQuery(sql);
     %>
 
@@ -58,7 +58,7 @@
 
             <!-- data part -->
             <div class="col-md-10">
-                <h4>Top 50 Scholars</h4>
+                <h4>Top 30 Scholars</h4>
                 <table id='atable' class='table listtable table-hover'>
                     <tr>
                         <th>Rank</th>

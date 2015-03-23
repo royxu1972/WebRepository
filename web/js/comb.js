@@ -162,6 +162,24 @@ function showpagecount() {
 	}
 }
 
+
+/*
+
+ */
+function prepareauthor(author) {
+	var ja = eval( "("+author+")" );
+
+	$("#author_aff").html("<p>" + ja.full_affiliation + "</p>");
+	var str = "";
+	if( ja.email != "" ) {
+		str += "<i class='fa fa-envelope-o fa-fw'></i> " + ja.email ;
+	}
+	if( ja.homepage != "" ) {
+		str += "&nbsp; | &nbsp;<a href='" + ja.homepage + "' target = '_blank'>homepage</a>";
+	}
+	$("#author_contact").html("<p class='pull-right'>" + str + "</p>");
+}
+
 /*
  * make the result show
  * for all | index | author | field | publication

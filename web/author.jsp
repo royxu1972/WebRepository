@@ -29,6 +29,13 @@
                 $("#wait").show();
                 $("#main_list").hide();
                 $.ajax({
+                    url: "authorAction.action",
+                    type: "post",
+                    dataType: "json",
+                    data: para,
+                    success: prepareauthor
+                });
+                $.ajax({
                     url: "contentAction.action",
                     type: "post",
                     dataType: "json",
@@ -69,11 +76,13 @@
                         </ul>
                     </div>
 
-                    <!--div class="col-md-12">
-                        <p>-- University, -- Country</p>
-                        <p><a href="#">(and a link to google author or personal home page)</a></p>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div id="author_aff" class="col-md-6 col-sm-12"></div>
+                            <div id="author_contact" class="col-md-6 col-sm-12"></div>
+                        </div>
                         <br>
-                    </div-->
+                    </div>
 
                     <div class="col-md-12">
                         <div id="sta"></div>

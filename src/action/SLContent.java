@@ -125,6 +125,11 @@ public class SLContent extends ActionSupport {
         this.data = ja.toString();
         */
 
+        // close
+        preState.close();
+        rs.close();
+        conn.close();
+
         /* jackson */
         OutputStream out = new ByteArrayOutputStream();
         ObjectMapper mapper = new ObjectMapper();

@@ -170,6 +170,9 @@ a.none_dec:link {
     float: left;
 }
 
+#author_aff {
+    padding-left: 30px;
+}
 
 /* new header */
 header {

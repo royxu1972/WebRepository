@@ -1,7 +1,6 @@
 package model;
 
 public class Paper {
-
     /*
     @type { bib,
         author = { author },
@@ -14,8 +13,6 @@ public class Paper {
         doi = { doi }
     }
     */
-
-
     // data
     private String bib ;
     private String type ;
@@ -76,4 +73,5 @@ public class Paper {
 
     public String getDoi() { return doi ; }
     public void setDoi( String a ) { this.doi = a ; }
+
 }

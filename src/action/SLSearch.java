@@ -91,8 +91,12 @@ public class SLSearch extends ActionSupport {
             p.setDoi( rs.wasNull() ? "" : doi );
 
             paper.add(p);
-
         }
+
+        // close
+        preState.close();
+        rs.close();
+        conn.close();
 
         /* json
 		JSONArray ja = JSONArray.fromObject(paper);
