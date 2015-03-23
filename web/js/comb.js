@@ -164,7 +164,7 @@ function showpagecount() {
 
 
 /*
-
+ *	dealing with authors
  */
 function prepareauthor(author) {
 	var ja = eval( "("+author+")" );

@@ -282,6 +282,56 @@
             });
         }); // end $(#show_c3)
 
+
+        $("#show_c4").click(function () {
+            var data = [
+                {
+                    "code": "IN",
+                    "value": 7,
+                    "name": "India"
+                },
+                {
+                    "code": "CN",
+                    "value": 3,
+                    "name": "China"
+                },
+            ]
+
+            $("#btn_group").hide();
+            $("#back_home").html("<a href='./statistic.jsp'>statistic</a>");
+            $("#current").html("<span class='divider'></span>C4 C4");
+            $("#pbread").fadeIn("slow");
+            $("#container-chart").fadeIn("slow");
+            $('#container-chart').highcharts('Map', {
+                title : {
+                    text : 'Zoom in on country by double click'
+                },
+                mapNavigation: {
+                    enabled: true,
+                    enableDoubleClickZoomTo: true
+                },
+                colorAxis: {
+                    min: 1,
+                    max: 20,
+                    type: 'linear'
+                },
+                series : [{
+                    data : data,
+                    mapData: Highcharts.maps['custom/world'],
+                    joinBy: ['iso-a2', 'code'],
+                    name: 'The number of authors',
+                    states: {
+                        hover: {
+                            color: '#BADA55'
+                        }
+                    },
+                    tooltip: {
+                        valueSuffix: ''
+                    }
+                }]
+            });
+        });
+
     });
 
 </script>
@@ -316,29 +366,34 @@
                     </div>
                 </div>
 
-                <div id="btn_group" style="text-align:center" class="row">
-                    <div class="col-md-1"></div>
+                <div id="btn_group" style="text-align:center">
+                    <div class = "row">
+                        <div class="col-md-3 col-md-offset-1">
+                            <div id="show_c1"><a href="#" class="img-thumbnail"><img src="image/chart1.ico"/></a></div>
+                            <h4>Number of Publication</h4>
+                            <p>The Number of Publications in the Year from <%=firstyear%> to <%=lastyear%></p>
+                        </div>
 
-                    <div class="col-md-3">
-                        <div id="show_c1"><a href="#" class="img-thumbnail"><img src="image/chart1.ico"/></a></div>
-                        <h4>Number of Publication</h4>
-                        <p>The Number of Publications in the Year from <%=firstyear%> to <%=lastyear%></p>
+                        <div class="col-md-3 col-md-offset-1">
+                            <div id="show_c2"><a href="#" class="img-thumbnail"><img src="image/chart2.ico"/></a></div>
+                            <h4>Distribtation of Field</h4>
+                            <p>The Distribtation of CT Research Fields</p>
+                        </div>
+
+                        <div class="col-md-3 col-md-offset-1">
+                            <div id="show_c3"><a href="#" class="img-thumbnail"><img src="image/chart3.ico"/></a></div>
+                            <h4>Annual Publication</h4>
+                            <p>The Annual Publication Number of Top Three Research Fields</p>
+                        </div>
                     </div>
+                    <br>
 
-                    <div class="col-md-1"></div>
-
-                    <div class="col-md-3">
-                        <div id="show_c2"><a href="#" class="img-thumbnail"><img src="image/chart2.ico"/></a></div>
-                        <h4>Distribtation of Field</h4>
-                        <p>The Distribtation of CT Research Fields</p>
-                    </div>
-
-                    <div class="col-md-1"></div>
-
-                    <div class="col-md-3">
-                        <div id="show_c3"><a href="#" class="img-thumbnail"><img src="image/chart3.ico"/></a></div>
-                        <h4>Annual Publication</h4>
-                        <p>The Annual Publication Number of Top Three Research Fields</p>
+                    <div class="row">
+                        <div class="col-md-3 col-md-offset-1">
+                            <div id="show_c4"><a href="#" class="img-thumbnail"><img src="image/chart1.ico"/></a></div>
+                            <h4>Test C4</h4>
+                            <p>sadjaslkd asdsa asjkdlja das djqkwdd qwd</p>
+                        </div>
                     </div>
                 </div>
 
@@ -346,6 +401,8 @@
                     <div class="col-md-12" id="container-chart"
                          style="display:none; min-width: 400px; height: 400px; margin: 0 auto"></div>
                 </div>
+
+                <div id="container2"></div>
 
             </div>
             <!-- span10 -->
@@ -361,6 +418,9 @@
 <jsp:include page="template_bottom.jsp"/>
 
 <script src="./js/highcharts.js"></script>
-<script src="./js/exporting.js"></script>
+<script src="./js/modules/map.js"></script>
+<script src="./js/modules/data.js"></script>
+<script src="./js/modules/exporting.js"></script>
+<script src="./js/modules/world.js"></script>
 </body>
 </html>
