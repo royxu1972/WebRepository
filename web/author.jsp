@@ -111,6 +111,10 @@
                     boolean first = false;
                 %>
                 <div id="main_list" class="row">
+                    <p>
+                        <strong>Now we only present the authors who have been listed
+                            as the first author in this page. The data is continuously updating. </strong>
+                    </p>
                     <%
                         out.println("<div class='col-md-4'><h2><span class='label label-success indexlabel'>A</span></h2>");
                         while (rs.next()) {
@@ -126,6 +130,8 @@
                             first = true;
                         }
                         out.println("</div>");
+                        rs.close();
+                        conn.close();
                     %>
                 </div>
 

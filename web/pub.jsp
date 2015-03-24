@@ -95,7 +95,7 @@
                 %>
                 <div id="main_list" class="row">
                     <div class="col-md-12">
-                        <h4>Main Journal</h4>
+                        <h4>Main Journals</h4>
                         <hr>
                         <%
                             while (rs1.next()) {
@@ -103,11 +103,12 @@
                                 String abbr = rs1.getString(3);
                                 out.println("<p id='" + abbr + "'><a href='#'>" + name + " (" + abbr + ")</a></p>");
                             }
+                            rs1.close();
                         %>
                         <br/><br/>
 
 
-                        <h4>Main Conference</h4>
+                        <h4>Main Conferences</h4>
                         <hr>
                         <%
                             String sql2 = "select * from paper.listpub where type = 'inproceedings'";
@@ -117,14 +118,16 @@
                                 String abbr = rs2.getString(3);
                                 out.println("<p id='" + abbr + "'><a href='#'>" + name + " (" + abbr + ")</a></p>");
                             }
+                            rs2.close();
+                            conn.close();
                         %>
                         <br/><br/>
 
                         <h4>Others</h4>
                         <hr>
-                        <p id="phd"><a href="#">Phd thesis</a></p>
-                        <p id="book"><a href="#">Book Chapter</a></p>
-                        <p id="tech"><a href="#">Technique Report</a></p>
+                        <p id="phd"><a href="#">Ph.D Dissertation</a></p>
+                        <p id="book"><a href="#">Book or Chapter</a></p>
+                        <p id="tech"><a href="#">Technical Report</a></p>
                         <br/><br/>
 
                     </div>

@@ -99,7 +99,10 @@
                                     "<td>" + rs.getString(15) + "</td>" +
                                     "<td>" + rs.getString(16) + "</td></tr>");
                             i++;
-                        }%>
+                        }
+                        rs.close();
+                        conn.close();
+                    %>
                 </table>
             </div>
             <!-- span10 -->

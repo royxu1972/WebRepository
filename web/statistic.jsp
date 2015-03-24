@@ -154,7 +154,7 @@
         $("#show_c2").click(function () {
             $("#btn_group").hide();
             $("#back_home").html("<a href='./statistic.jsp'>statistic</a>");
-            $("#current").html("<span class='divider'></span>ratio of field");
+            $("#current").html("<span class='divider'></span>distribution of field");
             $("#pbread").fadeIn("slow");
             $("#container-chart").fadeIn("slow");
 
@@ -180,7 +180,7 @@
                     plotShadow: false
                 },
                 title: {
-                    text: 'The Distributation of CT Research Fields'
+                    text: 'The Distribution of CT Research Fields'
                 },
                 tooltip: {
                     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -225,7 +225,7 @@
         $("#show_c3").click(function () {
             $("#btn_group").hide();
             $("#back_home").html("<a href='./statistic.jsp'>statistic</a>");
-            $("#current").html("<span class='divider'></span>number of field");
+            $("#current").html("<span class='divider'></span>annual publication");
             $("#pbread").fadeIn("slow");
             $("#container-chart").fadeIn("slow");
 
@@ -234,7 +234,7 @@
                     type: 'column'
                 },
                 title: {
-                    text: 'The Annual Publication Number of Top Three Research Fields'
+                    text: 'The Annual Publication Number of the Top Three Research Fields'
                 },
                 xAxis: {
                     categories: [<%=yearindex%>],
@@ -285,34 +285,52 @@
 
         $("#show_c4").click(function () {
             var data = [
-                {
-                    "code": "IN",
-                    "value": 7,
-                    "name": "India"
-                },
-                {
-                    "code": "CN",
-                    "value": 3,
-                    "name": "China"
-                },
+                {"code": "AU", "value": 2, "name": "Australia"},
+                {"code": "AT", "value": 1, "name": "Austria"},
+                {"code": "BR", "value": 1, "name": "Brazil"},
+                {"code": "CA", "value": 9, "name": "Canada"},
+                {"code": "CN", "value": 31, "name": "China"},
+                {"code": "HR", "value": 1, "name": "Croatia"},
+                {"code": "DK", "value": 2, "name": "Denmark"},
+                {"code": "FI", "value": 2, "name": "Finland"},
+                {"code": "DE", "value": 3, "name": "Germany"},
+                {"code": "IN", "value": 5, "name": "India"},
+                {"code": "IE", "value": 1, "name": "Ireland"},
+                {"code": "IL", "value": 4, "name": "Israel"},
+                {"code": "IT", "value": 4, "name": "Italy"},
+                {"code": "JP", "value": 6, "name": "Japan"},
+                {"code": "JO", "value": 1, "name": "Jordan"},
+                {"code": "LU", "value": 2, "name": "Luxembourg"},
+                {"code": "MY", "value": 8, "name": "Malaysia"},
+                {"code": "MX", "value": 7, "name": "Mexico"},
+                {"code": "NO", "value": 2, "name": "Norway"},
+                {"code": "RO", "value": 1, "name": "Romania"},
+                {"code": "SA", "value": 1, "name": "Saudi Arabia"},
+                {"code": "RS", "value": 1, "name": "Serbia"},
+                {"code": "ES", "value": 3, "name": "Spain"},
+                {"code": "SE", "value": 2, "name": "Sweden"},
+                {"code": "TR", "value": 3, "name": "Turkey"},
+                {"code": "GB", "value": 2, "name": "United Kingdom"},
+                {"code": "US", "value": 65, "name": "United States of America"},
+                {"code": "VN", "value": 1, "name": "Vietnam"}
             ]
 
             $("#btn_group").hide();
             $("#back_home").html("<a href='./statistic.jsp'>statistic</a>");
-            $("#current").html("<span class='divider'></span>C4 C4");
+            $("#current").html("<span class='divider'></span>researchers in the world");
             $("#pbread").fadeIn("slow");
             $("#container-chart").fadeIn("slow");
             $('#container-chart').highcharts('Map', {
                 title : {
-                    text : 'Zoom in on country by double click'
+                    text : 'The Distribution of Researchers across the World'
                 },
                 mapNavigation: {
                     enabled: true,
                     enableDoubleClickZoomTo: true
                 },
                 colorAxis: {
-                    min: 1,
-                    max: 20,
+                    min: 0,
+                    max: 75,
                     type: 'linear'
                 },
                 series : [{
@@ -371,28 +389,28 @@
                         <div class="col-md-3 col-md-offset-1">
                             <div id="show_c1"><a href="#" class="img-thumbnail"><img src="image/chart1.ico"/></a></div>
                             <h4>Number of Publication</h4>
-                            <p>The Number of Publications in the Year from <%=firstyear%> to <%=lastyear%></p>
+                            <p>The number of publications from <%=firstyear%> to <%=lastyear%></p>
                         </div>
 
                         <div class="col-md-3 col-md-offset-1">
                             <div id="show_c2"><a href="#" class="img-thumbnail"><img src="image/chart2.ico"/></a></div>
-                            <h4>Distribtation of Field</h4>
-                            <p>The Distribtation of CT Research Fields</p>
+                            <h4>Distribution of Field</h4>
+                            <p>The distribution of CT research fields</p>
                         </div>
 
                         <div class="col-md-3 col-md-offset-1">
                             <div id="show_c3"><a href="#" class="img-thumbnail"><img src="image/chart3.ico"/></a></div>
                             <h4>Annual Publication</h4>
-                            <p>The Annual Publication Number of Top Three Research Fields</p>
+                            <p>The annual publication number of the top three research fields</p>
                         </div>
                     </div>
                     <br>
 
                     <div class="row">
                         <div class="col-md-3 col-md-offset-1">
-                            <div id="show_c4"><a href="#" class="img-thumbnail"><img src="image/chart1.ico"/></a></div>
-                            <h4>Test C4</h4>
-                            <p>sadjaslkd asdsa asjkdlja das djqkwdd qwd</p>
+                            <div id="show_c4"><a href="#" class="img-thumbnail"><img src="image/chart4.ico"/></a></div>
+                            <h4>Researchers in the World (beta version)</h4>
+                            <p>The distribution of researchers across the world</p>
                         </div>
                     </div>
                 </div>
